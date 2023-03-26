@@ -10,7 +10,7 @@ class Cart {
     
     // Set cart.length to head icon
     render() {
-        const totalPrice = this.subtotal().totalPrice.toFixed(2);
+        const totalPrice = this.sum.toFixed(2);
         
         this.headerCart.forEach(element => {
             element.innerHTML = `            
@@ -58,7 +58,6 @@ class Cart {
 
     // Change number of units
     changeNumberOfUnits(action, id) {
-        console.log(this.data);
         this.data = this.data.map((item) => {
             let numberOfUnits = item.numberOfUnits;
             if (item.id === id) {
@@ -74,6 +73,16 @@ class Cart {
         this.save();
     }
 
+    // Change number of units by index
+    changeQuantityByIndex(action, index) {
+        let value = this.data[index].numberOfUnits;
+        if (action === 'minus') value--;
+        if (action === 'plus') value++;
+        this.data[index].numberOfUnits = value;
+        this.save();
+        return value;
+    }
+
     // Remove item from cart
     remove(id) {
         const index = this.data.findIndex(element => element.id === id);
@@ -82,17 +91,22 @@ class Cart {
         this.render();
     }
 
-    // Calculate subtotal
-    subtotal() {
-        let totalPrice = 0,
-            totalItems = 0;
-    
-        this.data.forEach((item) => {
-            totalPrice += item.price * item.numberOfUnits;
-            totalItems += item.numberOfUnits;
-        });
-    
-        return {totalPrice, totalItems};
+    removeByIndex(index) {
+        this.data.splice(index, 1);
+        this.save();
+        this.render();
+    }
+
+    // Return sum
+    get sum() {
+        return  this.data.reduce((accumulator, product) => 
+            (accumulator + product.price * product.numberOfUnits), 0);
+    }
+
+    // Return quantity of items
+    get quantity() {
+        return  this.data.reduce((accumulator, product) => 
+        (accumulator + product.numberOfUnits), 0);
     }
 }
 

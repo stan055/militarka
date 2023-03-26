@@ -3,6 +3,7 @@ let cart, product;
 const overlay = document.getElementById('overlay');
 const popupCart = document.getElementById('popupCart');
 const body = document.getElementsByTagName('body');
+const tableBody = document.querySelector('.shoping__cart__table > table > tbody');
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -22,16 +23,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//Product remove by id from the cart data
-function remove(id) {
-    cart.remove(id);
+//Product remove by Index from the cart data
+function remove(index) {
+    cart.removeByIndex(index);
     renderPopupCart();
 }
 
+// Quantity button 
+function qtybtn(action, index) {
+    let value = cart.data[index].numberOfUnits;
+    if (action === 'minus' && value === 1) return;
+    
+    value = cart.changeQuantityByIndex(action,index);
+    document.getElementById(`cart_input_${index}`).value = value;
+    renderSubtotal();
+}
+
 function renderPopupCart() {
-    const tableBody = document.querySelector('.shoping__cart__table > table > tbody');
+    renderCartTable();
+    renderSubtotal();
+}
+
+function renderCartTable() {
     tableBody.innerHTML = ``;
-    cart.data.forEach((item) => {
+    cart.data.forEach((item, index) => {
         tableBody.innerHTML += `
             <tr>
                 <td class="shoping__cart__item">
@@ -43,9 +58,9 @@ function renderPopupCart() {
                 <td class="shoping__cart__quantity">
                     <div class="quantity">
                         <div class="pro-qty">
-                            <span class="qtybtn" onclick="qtybtn('minus', ${item.id})">-</span>
-                            <input type="text" value="${item.numberOfUnits}">
-                            <span class="qtybtn" onclick="qtybtn('plus', ${item.id})">+</span>
+                            <span class="qtybtn" onclick="qtybtn('minus', ${index})">-</span>
+                            <input type="text" id="cart_input_${index}" value="${item.numberOfUnits}">
+                            <span class="qtybtn" onclick="qtybtn('plus', ${index})">+</span>
                         </div>
                     </div>
                 </td>
@@ -53,11 +68,15 @@ function renderPopupCart() {
                 ${item.price}
                 </td>
                 <td class="shoping__cart__item__close">
-                    <span class="icon_close" onclick="remove(${item.id})"></span>
+                    <span class="icon_close" onclick="remove(${index})"></span>
                 </td>
             </tr>
         `
     });
+}
+
+function renderSubtotal() {
+    document.getElementById("checkout_sum").innerHTML = `${cart.sum}₴`;
 }
 
 function addToCart() {

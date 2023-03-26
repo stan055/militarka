@@ -3611,7 +3611,37 @@ ol {
 	color: grey;
 	padding: 7px 15px;
 }
+
+.checkout_number {
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: #e9e9e9;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+#checkout_table_body th {
+	font-size: medium;
+	font-weight: normal;
+}
+
+.border-line {
+	display: block;
+	margin: 1rem 0 1rem 0;
+	width: 100%;
+	border-bottom: 1px solid #e1e1e1;
+	height: 1px;
+}
+
 /* :root { 
+	₴₴₴₴₴₴₴₴₴₴₴₴₴₴₴₴
 	--blue: #007bff;
 	--indigo: #6610f2;
 	--purple: #6f42c1;
