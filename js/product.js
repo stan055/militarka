@@ -76,7 +76,7 @@ function renderCartTable() {
 }
 
 function renderSubtotal() {
-    document.getElementById("checkout_sum").innerHTML = `${cart.sum}₴`;
+    document.getElementById("subtotal").innerHTML = `${cart.sum}₴`;
 }
 
 function addToCart() {
