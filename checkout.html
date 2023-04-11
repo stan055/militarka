@@ -337,27 +337,6 @@
     </footer>
     <!-- Footer Section End -->
 
-
- 
-<script>
-    let autocomplete;
-    function initAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'),
-            {
-                types: ['locality'],
-                componentRestrictions: {'country': ['UKR']},
-            });
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALc2_UrMM14eRYo0e9WAhU7xSJhZMuDWw&libraries=places&language=uk&callback=initAutocomplete" async defer></script>
-
-<style>
-    .pac-logo:after {
-        display: none;
-    }
-</style>
-
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -369,7 +348,7 @@
     <script src="js/main.js"></script>
     <script src="js/Cart.js"></script>  
     <script src="js/checkout.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALc2_UrMM14eRYo0e9WAhU7xSJhZMuDWw&libraries=places&language=uk&callback=initAutocomplete" async defer></script>
 
 </body>
 
