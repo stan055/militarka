@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cart = new Cart();
     renderProductsTable(cart.data);
+    autocompleteCity();
 });
 
 function renderProductsTable(data) {
@@ -33,18 +34,27 @@ function renderProductsTable(data) {
     });
 }
 
+// Autocomplete city by novaposhta api
+let Addresses;
 let timeId;
 function autocompleteCity() {
-    const cityName = document.getElementById("autocomplete").value;
-    if (cityName.length < 2) return;
-    
-    clearTimeout(timeId);
-    timeId = setTimeout(
-        searchSettlements,
-        1000,
-        cityName,        
-    );
-    
+    const input = document.getElementById("autocomplete");
+    input.addEventListener("input", (event) => {
+        if (event.inputType == "insertReplacementText" || event.inputType == null) {
+            const index = Addresses.findIndex(element => element.Present == event.target.value);
+            console.log(Addresses[index]);
+        } else {
+            const cityName = document.getElementById("autocomplete").value;
+            if (cityName.length > 1) {
+                clearTimeout(timeId);
+                timeId = setTimeout(
+                    searchSettlements,
+                    1000,
+                    cityName,        
+                );
+            }
+        }
+    });
 }
 
 const LIMIT = 27;
@@ -70,13 +80,15 @@ function searchSettlements(cityNameValue) {
         .then((data) => {
           const autocompleteSearch = document.getElementById("autocompleteSearch");
           autocompleteSearch.innerHTML = ``;
-          if(data.data[0].Addresses) {
-              data.data[0].Addresses.forEach(element => {
-                autocompleteSearch.innerHTML += `<option value="${element.Present}" />`;
-              });
+          if(data.data[0]) {
+            Addresses = data.data[0].Addresses;
+            Addresses.forEach(element => {
+                autocompleteSearch.innerHTML += `<option value="${element.Present}"/>`;
+            });
           }
         })
         .catch(console.error);
 }
+
 
 
