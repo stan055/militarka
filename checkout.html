@@ -191,13 +191,19 @@
                                 <span class="checkout_number">3</span>Доставка
                             </div>
                             
-                            <!-- Delivery end -->
-
                             <div class="checkout__input">
                                 <p>Ваше місто<span>*</span></p>
-                                <input id="autocomplete" type="text" placeholder="Виберіть своє місто" class="checkout__input__add">
+                                <input id="autocomplete" type="text" 
+                                    placeholder="Виберіть своє місто" 
+                                    class="checkout__input__add" 
+                                    oninput="autocompleteCity()"
+                                    list="autocompleteSearch">
+                                <datalist id="autocompleteSearch">
+                                </datalist> 
                             </div>
-
+                            
+                            <!-- Delivery end -->
+                            
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     Create an account?
@@ -348,7 +354,6 @@
     <script src="js/main.js"></script>
     <script src="js/Cart.js"></script>  
     <script src="js/checkout.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALc2_UrMM14eRYo0e9WAhU7xSJhZMuDWw&libraries=places&language=uk&callback=initAutocomplete" async defer></script>
 
 </body>
 
