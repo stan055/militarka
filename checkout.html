@@ -29,6 +29,8 @@
         <div class="loader"></div>
     </div>
 
+    <div class="overlay" id="overlay"></div>
+
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
@@ -196,10 +198,14 @@
                                 <input id="autocomplete" type="text" 
                                     placeholder="Виберіть своє місто" 
                                     class="checkout__input__add" 
-                                    
-                                    list="autocompleteSearch">
-                                <datalist id="autocompleteSearch">
-                                </datalist> 
+                                    autocomplete="off"
+                                    onclick="cityInputOnСlick()"
+                                    >
+                                <div class="input-list hide" id="city_list">
+                                    <ul id="city_list_ul">
+                                        <li>...</li>
+                                    </ul>
+                                </div>
                             </div>
                             
                             <!-- Delivery end -->

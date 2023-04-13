@@ -56,6 +56,10 @@
 	--dark: #343a40; 
 } */
 
+:root {
+	--border-color: #ebebeb
+}
+
 html,
 body {
 	height: 100%;
@@ -3185,7 +3189,7 @@ ol {
 		top: 0;
 		height: 100%;
 		width: 100%;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.4);
 		content: "";
 		z-index: 98;
 		visibility: hidden;
@@ -3447,7 +3451,7 @@ ol {
 		top: 0;
 		height: 100%;
 		width: 100%;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.4);
 		content: "";
 		z-index: 98;
 		visibility: hidden;
@@ -3567,7 +3571,7 @@ ol {
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	opacity: .5;
+	opacity: .4;
 	display: none;
 }
 
@@ -3670,3 +3674,34 @@ ol {
 	display: none;
 }
 
+.checkout__input__add {
+	position:relative;
+	z-index: 999;
+}
+
+.input-list {
+	margin-top: -20px;
+	position: absolute;
+	border: var(--border-color) solid 1px;
+	width: calc(100% - 30px) ;
+	background-color: white;
+	z-index: 999;
+	max-height: 20em;
+	overflow-y: scroll;
+}
+
+.input-list li {
+	padding: 10px;
+	list-style-type: none;
+	z-index: 999;
+}
+
+.input-list li:hover {
+	list-style-type: none;
+	background-color: var(--border-color);
+	cursor: pointer;
+}
+
+.hide {
+	display: none;
+}

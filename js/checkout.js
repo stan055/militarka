@@ -35,21 +35,18 @@ function renderProductsTable(data) {
 }
 
 // Autocomplete city by novaposhta api
-let Addresses;
 let timeId;
 function autocompleteCity() {
     const input = document.getElementById("autocomplete");
     input.addEventListener("input", (event) => {
         if (event.inputType == "insertReplacementText" || event.inputType == null) {
-            const index = Addresses.findIndex(element => element.Present == event.target.value);
-            console.log(Addresses[index]);
         } else {
             const cityName = document.getElementById("autocomplete").value;
             if (cityName.length > 1) {
                 clearTimeout(timeId);
                 timeId = setTimeout(
                     searchSettlements,
-                    1000,
+                    700,
                     cityName,        
                 );
             }
@@ -78,17 +75,35 @@ function searchSettlements(cityNameValue) {
       fetch(request)
         .then((response) => response.json())
         .then((data) => {
-          const autocompleteSearch = document.getElementById("autocompleteSearch");
-          autocompleteSearch.innerHTML = ``;
-          if(data.data[0]) {
-            Addresses = data.data[0].Addresses;
-            Addresses.forEach(element => {
-                autocompleteSearch.innerHTML += `<option value="${element.Present}"/>`;
+          const cityListEl = document.getElementById("city_list_ul");
+        if(data.data[0]) {
+            cityListEl.innerHTML = ``;
+            data.data[0].Addresses.forEach(element => {
+                cityListEl.innerHTML += 
+                `<li onclick="cityListOnClick('${element.Present}', 1)">${element.Present}</li>`;
             });
           }
         })
         .catch(console.error);
 }
 
+function cityListHide() {
+    document.getElementById("city_list").classList.add('hide');
+    document.getElementById("overlay").classList.remove('visible');
+}
 
+function cityInputOnСlick() { 
+    document.getElementById("city_list").classList.remove('hide'); 
+    document.getElementById("overlay").classList.add('visible'); 
+
+}
+
+function cityListOnClick(address) {
+    document.getElementById("autocomplete").value = address;
+    cityListHide();
+}
+
+document.getElementById("overlay").addEventListener("click", event => {
+    cityListHide();
+});
 
