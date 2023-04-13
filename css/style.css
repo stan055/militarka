@@ -3677,6 +3677,7 @@ ol {
 .checkout__input__add {
 	position:relative;
 	z-index: 999;
+	padding-left: 25px!important;
 }
 
 .input-list {
@@ -3705,3 +3706,4 @@ ol {
 .hide {
 	display: none;
 }
+
