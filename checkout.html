@@ -170,7 +170,7 @@
                             <div class="row mb-3 mt-4">
                                 <span class="checkout_number">2</span>Вибрані товари</p>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <table style="width: 100%;">
@@ -192,52 +192,58 @@
                             <div class="row mb-3 mt-4">
                                 <span class="checkout_number">3</span>Доставка
                             </div>
-                            
+
                             <div class="checkout__input">
                                 <p>Ваше місто<span>*</span></p>
-                                <svg height="18px" width="18px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                viewBox="0 0 512 512" xml:space="preserve" 
-                                style="position: relative; z-index: 1000; top: 32px; left: 5px;">
-                           <path style="fill:#999999;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176
-                               c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224
-                               c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64
-                               C189.26,196.392,219.612,225.024,256.004,224z"/>
-                           </svg>
-                                <input id="autocomplete" type="text" 
-                                    placeholder="Виберіть своє місто" 
-                                    class="checkout__input__add" 
-                                    autocomplete="off"
-                                    onclick="cityInputOnСlick()"
-                                    >
+
+                                <input id="autocomplete" type="text" placeholder="Виберіть своє місто"
+                                    class="checkout__input__add" autocomplete="off" onclick="cityInputOnСlick()">
                                 <div class="input-list hide" id="city_list">
                                     <ul id="city_list_ul">
                                         <li>...</li>
                                     </ul>
                                 </div>
+                                <svg height="18px" width="18px" version="1.1" id="Layer_1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 512 512" xml:space="preserve"
+                                    style="position: relative; z-index: 1000; top: -38px; left: 5px;">
+                                    <path style="fill:#999999;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176
+                               c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224
+                               c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64
+                               C189.26,196.392,219.612,225.024,256.004,224z" />
+                                </svg>
+                            </div>
+
+
+                            <div class="checkout__input__checkbox">
+                                <label for="acc1">
+                                    Відділення Нова Пошта?
+                                    <input type="radio" name="postType" value="2" id="acc1">
+                                    <span class="checkmark"></span>
+                                </label>
+                                
                             </div>
                             
+                            <div class="checkout__input ml-3">
+                                <input id="nv_post" type="text" placeholder="Виберіть відповідне відділення"
+                                class="checkout__input__add" autocomplete="off" onclick="nvPostInputOnСlick()">
+                                <div class="input-list hide" id="nv_post_list">
+                                    <ul id="nv_post_list_ul">
+                                        <li>...</li>
+                                    </ul>
+                                 </div>
+                            </div>
+
+                            <div class="checkout__input__checkbox">
+                                <label for="acc2">
+                                    Відділення Укрпошта?
+                                    <input type="radio" name="postType" value="1" id="acc2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
                             <!-- Delivery end -->
-                            
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+
                             <div class="checkout__input">
                                 <p>Order notes<span>*</span></p>
                                 <input type="text"
@@ -366,7 +372,7 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/Cart.js"></script>  
+    <script src="js/Cart.js"></script>
     <script src="js/checkout.js"></script>
 
 </body>

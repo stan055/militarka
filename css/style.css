@@ -3676,12 +3676,11 @@ ol {
 
 .checkout__input__add {
 	position:relative;
-	z-index: 999;
 	padding-left: 25px!important;
+	margin-bottom: 0!important;
 }
 
 .input-list {
-	margin-top: -20px;
 	position: absolute;
 	border: var(--border-color) solid 1px;
 	width: calc(100% - 30px) ;
@@ -3707,3 +3706,6 @@ ol {
 	display: none;
 }
 
+#nv_post_list {
+	width: calc(100% - 46px);
+}

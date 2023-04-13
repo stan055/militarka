@@ -87,15 +87,25 @@ function searchSettlements(cityNameValue) {
         .catch(console.error);
 }
 
-function cityListHide() {
-    document.getElementById("city_list").classList.add('hide');
+function listsHide() {
+    for (const element of document.getElementsByClassName("input-list")){
+        element.classList.add("hide");}
+
     document.getElementById("overlay").classList.remove('visible');
+    document.getElementById("autocomplete").style.zIndex = "1";
+
+    for (const element of document.getElementsByClassName("checkout__input__add")){
+        element.style.zIndex = "1";}
 }
 
-function cityInputOnСlick() { 
-    document.getElementById("city_list").classList.remove('hide'); 
+function inputOnСlick(id1, id3) { 
+    document.getElementById(id1).classList.remove('hide'); 
     document.getElementById("overlay").classList.add('visible'); 
+    document.getElementById(id3).style.zIndex = "999";
+}
 
+function cityInputOnСlick() {
+    inputOnСlick("city_list", "autocomplete");
 }
 
 function cityListOnClick(address) {
@@ -104,6 +114,9 @@ function cityListOnClick(address) {
 }
 
 document.getElementById("overlay").addEventListener("click", event => {
-    cityListHide();
+    listsHide();
 });
 
+function nvPostInputOnСlick() {
+    inputOnСlick("nv_post_list","nv_post");
+}
