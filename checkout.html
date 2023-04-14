@@ -186,8 +186,10 @@
                                     </table>
                                 </div>
                             </div>
+
                             <!-- Products table end-->
                             <span class="border-line"></span>
+
                             <!-- Delivery start -->
                             <div class="row mb-3 mt-4">
                                 <span class="checkout_number">3</span>Доставка
@@ -197,7 +199,8 @@
                                 <p>Ваше місто<span>*</span></p>
 
                                 <input id="autocomplete" type="text" placeholder="Виберіть своє місто"
-                                    class="checkout__input__add" autocomplete="off" onclick="cityInputOnСlick()">
+                                    class="checkout__input__add" autocomplete="off"
+                                    onclick="cityInput('autocomplete', 'city_list')">
                                 <div class="input-list hide" id="city_list">
                                     <ul id="city_list_ul">
                                         <li>...</li>
@@ -214,35 +217,55 @@
                                 </svg>
                             </div>
 
+                            <!-- Radio button post start-->
 
+                            <!-- Radio Button  -->
                             <div class="checkout__input__checkbox">
-                                <label for="acc1">
+                                <label for="nv_post_radio">
                                     Відділення Нова Пошта?
-                                    <input type="radio" name="postType" value="2" id="acc1">
+                                    <input type="radio" name="postType" value="2" id="nv_post_radio"
+                                        onclick="postRadio('nv_post_number', 'ukr_post_number')">
                                     <span class="checkmark"></span>
                                 </label>
-                                
+
                             </div>
-                            
+
+                            <!-- Input -->
                             <div class="checkout__input ml-3">
-                                <input id="nv_post" type="text" placeholder="Виберіть відповідне відділення"
-                                class="checkout__input__add" autocomplete="off" onclick="nvPostInputOnСlick()">
-                                <div class="input-list hide" id="nv_post_list">
-                                    <ul id="nv_post_list_ul">
+                                <input id="nv_post_number" type="text" placeholder="Виберіть відповідне відділення"
+                                    class="checkout__input__add hide" autocomplete="off" onclick="nvPostInputOnСlick()">
+                                <div class="input-list hide" id="nv_post_number_list">
+                                    <ul id="nv_post_number_list_ul">
                                         <li>...</li>
                                     </ul>
-                                 </div>
+                                </div>
                             </div>
 
+                            <!-- Radio Button  -->
                             <div class="checkout__input__checkbox">
-                                <label for="acc2">
+                                <label for="ukr_post_radio">
                                     Відділення Укрпошта?
-                                    <input type="radio" name="postType" value="1" id="acc2">
+                                    <input type="radio" name="postType" value="1" id="ukr_post_radio"
+                                        onclick="postRadio('ukr_post_number', 'nv_post_number')">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
 
+                            <!-- Input -->
+                            <div class="checkout__input ml-3">
+                                <input id="ukr_post_number" type="text" placeholder="Виберіть відповідне відділення"
+                                    class="checkout__input__add hide" autocomplete="off" onclick="nvPostInputOnСlick()">
+                                <div class="input-list hide" id="ukr_post_number_list">
+                                    <ul id="ukr_post_number_list_ul">
+                                        <li>...</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Radio button post end-->
+
                             <!-- Delivery end -->
+                            <span class="border-line"></span>
 
                             <div class="checkout__input">
                                 <p>Order notes<span>*</span></p>
