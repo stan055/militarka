@@ -41,6 +41,13 @@ function cityInput(idInput, idList) {
     autocomplete(input, list.children[0], queryCity, idInput);
 }
 
+function nvPostInput(idInput, idList) {
+    const input = document.getElementById(idInput);
+    const list = document.getElementById(idList);
+    showList(input, list);
+    autocomplete(input, list.children[0], queryNvPost, idInput);
+}
+
 function queryCity(cityName) {
     return {
         "apiKey": apiKey,
@@ -53,6 +60,21 @@ function queryCity(cityName) {
         }
     }
 } 
+
+function queryNvPost(ref) {
+    return {
+        "apiKey": apiKey,
+        "modelName": "Address",
+        "calledMethod": "getWarehouses",
+        "methodProperties": {
+            // "CityName": "Васильков",
+            "CityRef" : "db5c88d9-391c-11dd-90d9-001a92567626",
+            "Page" : "1",
+            "Limit" : "50",
+            "Language" : "UA",
+        }
+    };
+}
 
 let timeId;
 function autocomplete(input, ul, queryObj, idInput) {
@@ -77,6 +99,8 @@ function sendQuery(query, ul, idInput) {
       fetch(request)
         .then((response) => response.json())
         .then((data) => {
+    console.log(data);
+
         if(data.data[0]) {
             writeList(data.data[0], ul, idInput);
         }
@@ -88,11 +112,11 @@ function writeList(data, ul, idInput) {
         ul.innerHTML = ``;
         data.Addresses.forEach(element => {
             ul.innerHTML += 
-            `<li onclick="cityListOnClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
+            `<li onclick="listClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
         });
 }
 
-function cityListOnClick(address, id) {
+function listClick(address, id) {
     document.getElementById(id).value = address;
     listsHide();
 }
@@ -118,9 +142,6 @@ document.getElementById("overlay").addEventListener("click", event => {
     listsHide();
 });
 
-function nvPostInputOnСlick() {
-    inputOnСlick("nv_post_list","nv_post");
-}
 
 function postRadio(show, hide) {
     document.getElementById(show).classList.remove("hide");
