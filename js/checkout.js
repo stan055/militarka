@@ -1,11 +1,10 @@
 const apiKey = "9bd900f2cabe860e47e323dad85630da";
 const requestURL = 'https://api.novaposhta.ua/v2.0/json/';
+const LIMIT = 27;
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const cart = new Cart();
     renderProductsTable(cart.data);
-    autocompleteCity();
 });
 
 function renderProductsTable(data) {
@@ -35,56 +34,67 @@ function renderProductsTable(data) {
 }
 
 // Autocomplete city by novaposhta api
+function cityInput(idInput, idList) {
+    const input = document.getElementById(idInput);
+    const list = document.getElementById(idList);
+    showList(input, list);
+    autocomplete(input, list.children[0], queryCity, idInput);
+}
+
+function queryCity(cityName) {
+    return {
+        "apiKey": apiKey,
+        "modelName": "Address",
+        "calledMethod": "searchSettlements",
+        "methodProperties": {
+            "CityName" : cityName,
+            "Limit" : LIMIT,
+            "Page" : "1"
+        }
+    }
+} 
+
 let timeId;
-function autocompleteCity() {
-    const input = document.getElementById("autocomplete");
+function autocomplete(input, ul, queryObj, idInput) {
     input.addEventListener("input", (event) => {
         if (event.inputType == "insertReplacementText" || event.inputType == null) {
         } else {
-            const cityName = document.getElementById("autocomplete").value;
-            if (cityName.length > 1) {
+            if (input.value.length > 1) {
+                const qery = queryObj(input.value);
                 clearTimeout(timeId);
-                timeId = setTimeout(
-                    searchSettlements,
-                    700,
-                    cityName,        
-                );
+                timeId = setTimeout(sendQuery, 700, qery, ul, idInput);
             }
         }
     });
 }
 
-const LIMIT = 27;
-function searchSettlements(cityNameValue) {
-    const obj = {
-        "apiKey": apiKey,
-        "modelName": "Address",
-        "calledMethod": "searchSettlements",
-        "methodProperties": {
-            "CityName" : cityNameValue,
-            "Limit" : LIMIT,
-            "Page" : "1"
-        }
-     }
-
+function sendQuery(query, ul, idInput) {
      const request = new Request(requestURL, {
         method: "POST",
-        body: JSON.stringify(obj),
+        body: JSON.stringify(query),
       });
       
       fetch(request)
         .then((response) => response.json())
         .then((data) => {
-          const cityListEl = document.getElementById("city_list_ul");
         if(data.data[0]) {
-            cityListEl.innerHTML = ``;
-            data.data[0].Addresses.forEach(element => {
-                cityListEl.innerHTML += 
-                `<li onclick="cityListOnClick('${element.Present}', 1)">${element.Present}</li>`;
-            });
-          }
+            writeList(data.data[0], ul, idInput);
+        }
         })
         .catch(console.error);
+}
+
+function writeList(data, ul, idInput) {
+        ul.innerHTML = ``;
+        data.Addresses.forEach(element => {
+            ul.innerHTML += 
+            `<li onclick="cityListOnClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
+        });
+}
+
+function cityListOnClick(address, id) {
+    document.getElementById(id).value = address;
+    listsHide();
 }
 
 function listsHide() {
@@ -98,19 +108,10 @@ function listsHide() {
         element.style.zIndex = "1";}
 }
 
-function inputOnСlick(id1, id3) { 
-    document.getElementById(id1).classList.remove('hide'); 
+function showList(input, list) { 
+    input.style.zIndex = "999";
+    list.classList.remove('hide'); 
     document.getElementById("overlay").classList.add('visible'); 
-    document.getElementById(id3).style.zIndex = "999";
-}
-
-function cityInputOnСlick() {
-    inputOnСlick("city_list", "autocomplete");
-}
-
-function cityListOnClick(address) {
-    document.getElementById("autocomplete").value = address;
-    cityListHide();
 }
 
 document.getElementById("overlay").addEventListener("click", event => {
@@ -119,4 +120,9 @@ document.getElementById("overlay").addEventListener("click", event => {
 
 function nvPostInputOnСlick() {
     inputOnСlick("nv_post_list","nv_post");
+}
+
+function postRadio(show, hide) {
+    document.getElementById(show).classList.remove("hide");
+    document.getElementById(hide).classList.add("hide");
 }
