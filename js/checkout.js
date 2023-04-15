@@ -1,6 +1,9 @@
 const apiKey = "9bd900f2cabe860e47e323dad85630da";
 const requestURL = 'https://api.novaposhta.ua/v2.0/json/';
 const LIMIT = 27;
+const cityInput = document.getElementById("city_input");
+const cityList = document.getElementById("city_list");
+const overlay = document.getElementById("overlay");
 
 document.addEventListener("DOMContentLoaded", () => {
     const cart = new Cart();
@@ -33,13 +36,57 @@ function renderProductsTable(data) {
     });
 }
 
-// Autocomplete city by novaposhta api
-function cityInput(idInput, idList) {
-    const input = document.getElementById(idInput);
-    const list = document.getElementById(idList);
-    showList(input, list);
-    autocomplete(input, list.children[0], queryCity, idInput);
+overlay.addEventListener("click", () => listsHide()); 
+
+cityInput.addEventListener("focus", event => showList(cityInput, cityList));
+
+let timeId;
+cityInput.addEventListener("input", event => {
+    const cityName = event.target.value; 
+    if (cityName.length > 1) {
+        const query = {
+            "apiKey": apiKey,
+            "modelName": "Address",
+            "calledMethod": "searchSettlements",
+            "methodProperties": {
+                "CityName" : cityName,
+                "Limit" : LIMIT,
+                "Page" : "1"
+            }};
+        clearTimeout(timeId);
+        timeId = setTimeout(sendQuery, 700, query, cityList.firstElementChild, cityInput.id);
+    }
+});
+
+function writeList(data, listUl, idInput) {
+    if(data.data[0].Addresses) {
+        listUl.innerHTML = ``;
+        data.data[0].Addresses.forEach(element => {
+            listUl.innerHTML += 
+            `<li onclick="listClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
+        });
+    }
 }
+
+function sendQuery(query, listUl, idInput) {
+    const request = new Request(requestURL, {
+       method: "POST",
+       body: JSON.stringify(query),
+     });
+     
+     fetch(request)
+       .then((response) => response.json())
+       .then((data) => writeList(data, listUl, idInput))
+       .catch(console.error);
+}
+
+// Autocomplete city by novaposhta api
+// function cityInput(idInput, idList) {
+//     const input = document.getElementById(idInput);
+//     const list = document.getElementById(idList);
+//     showList(input, list);
+//     autocomplete(input, list.children[0], queryCity, idInput);
+// }
 
 function nvPostInput(idInput, idList) {
     const input = document.getElementById(idInput);
@@ -48,18 +95,18 @@ function nvPostInput(idInput, idList) {
     autocomplete(input, list.children[0], queryNvPost, idInput);
 }
 
-function queryCity(cityName) {
-    return {
-        "apiKey": apiKey,
-        "modelName": "Address",
-        "calledMethod": "searchSettlements",
-        "methodProperties": {
-            "CityName" : cityName,
-            "Limit" : LIMIT,
-            "Page" : "1"
-        }
-    }
-} 
+// function queryCity(cityName) {
+//     return {
+//         "apiKey": apiKey,
+//         "modelName": "Address",
+//         "calledMethod": "searchSettlements",
+//         "methodProperties": {
+//             "CityName" : cityName,
+//             "Limit" : LIMIT,
+//             "Page" : "1"
+//         }
+//     }
+// } 
 
 function queryNvPost(ref) {
     return {
@@ -76,45 +123,22 @@ function queryNvPost(ref) {
     };
 }
 
-let timeId;
-function autocomplete(input, ul, queryObj, idInput) {
-    input.addEventListener("input", (event) => {
-        if (event.inputType == "insertReplacementText" || event.inputType == null) {
-        } else {
-            if (input.value.length > 1) {
-                const qery = queryObj(input.value);
-                clearTimeout(timeId);
-                timeId = setTimeout(sendQuery, 700, qery, ul, idInput);
-            }
-        }
-    });
-}
+// function autocomplete(input, ul, queryObj, idInput) {
+//     input.addEventListener("input", (event) => {
+//         if (event.inputType == "insertReplacementText" || event.inputType == null) {
+//         } else {
+//             if (input.value.length > 1) {
+//                 const qery = queryObj(input.value);
+//                 clearTimeout(timeId);
+//                 timeId = setTimeout(sendQuery, 700, qery, ul, idInput);
+//             }
+//         }
+//     });
+// }
 
-function sendQuery(query, ul, idInput) {
-     const request = new Request(requestURL, {
-        method: "POST",
-        body: JSON.stringify(query),
-      });
-      
-      fetch(request)
-        .then((response) => response.json())
-        .then((data) => {
-    console.log(data);
 
-        if(data.data[0]) {
-            writeList(data.data[0], ul, idInput);
-        }
-        })
-        .catch(console.error);
-}
 
-function writeList(data, ul, idInput) {
-        ul.innerHTML = ``;
-        data.Addresses.forEach(element => {
-            ul.innerHTML += 
-            `<li onclick="listClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
-        });
-}
+
 
 function listClick(address, id) {
     document.getElementById(id).value = address;
@@ -122,12 +146,11 @@ function listClick(address, id) {
 }
 
 function listsHide() {
+    overlay.classList.remove('visible');
+    // Hide all lists
     for (const element of document.getElementsByClassName("input-list")){
         element.classList.add("hide");}
-
-    document.getElementById("overlay").classList.remove('visible');
-    document.getElementById("autocomplete").style.zIndex = "1";
-
+    // All inputs z-index = 1
     for (const element of document.getElementsByClassName("checkout__input__add")){
         element.style.zIndex = "1";}
 }
@@ -135,13 +158,8 @@ function listsHide() {
 function showList(input, list) { 
     input.style.zIndex = "999";
     list.classList.remove('hide'); 
-    document.getElementById("overlay").classList.add('visible'); 
+    overlay.classList.add('visible'); 
 }
-
-document.getElementById("overlay").addEventListener("click", event => {
-    listsHide();
-});
-
 
 function postRadio(show, hide) {
     document.getElementById(show).classList.remove("hide");
