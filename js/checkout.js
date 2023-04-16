@@ -1,9 +1,10 @@
 const apiKey = "9bd900f2cabe860e47e323dad85630da";
 const requestURL = 'https://api.novaposhta.ua/v2.0/json/';
-const LIMIT = 27;
 const cityInput = document.getElementById("city_input");
 const cityList = document.getElementById("city_list");
 const overlay = document.getElementById("overlay");
+const nvPostInput = document.getElementById("nv_post_input");
+const nvPostList = document.getElementById("nv_post_list");
 
 document.addEventListener("DOMContentLoaded", () => {
     const cart = new Cart();
@@ -39,8 +40,13 @@ function renderProductsTable(data) {
 overlay.addEventListener("click", () => listsHide()); 
 
 cityInput.addEventListener("focus", event => showList(cityInput, cityList));
+nvPostInput.addEventListener("focus", event => {
+    showList(nvPostInput, nvPostList);
+    getNvPostNumbers();
+});
 
-let timeId;
+let timeId, deliveryCity;
+// City Input Listener
 cityInput.addEventListener("input", event => {
     const cityName = event.target.value; 
     if (cityName.length > 1) {
@@ -50,25 +56,55 @@ cityInput.addEventListener("input", event => {
             "calledMethod": "searchSettlements",
             "methodProperties": {
                 "CityName" : cityName,
-                "Limit" : LIMIT,
+                "Limit" : 50,
                 "Page" : "1"
             }};
         clearTimeout(timeId);
-        timeId = setTimeout(sendQuery, 700, query, cityList.firstElementChild, cityInput.id);
+        timeId = setTimeout(sendQuery, 700, query, cityListWrite);
     }
 });
 
-function writeList(data, listUl, idInput) {
+function getNvPostNumbers() {
+    const query =  {
+        "apiKey": apiKey,
+        "modelName": "Address",
+        "calledMethod": "getWarehouses",
+        "methodProperties": {
+            // "CityName": "Васильків",
+            "CityRef" : deliveryCity,
+            "Page" : "1",
+            "Limit" : "300",
+            "Language" : "UA",
+        }
+    };
+    sendQuery(query, nvPostListWrite);
+}
+
+// Ref: "e718a680-4b33-11e4-ab6d-005056801329"
+// DeliveryCity: "8d5a980d-391c-11dd-90d9-001a92567626"
+
+function cityListWrite(data) {
     if(data.data[0].Addresses) {
-        listUl.innerHTML = ``;
+        cityList.firstElementChild.innerHTML = ``;
         data.data[0].Addresses.forEach(element => {
-            listUl.innerHTML += 
-            `<li onclick="listClick('${element.Present}', '${idInput}')">${element.Present}</li>`;
+            cityList.firstElementChild.innerHTML += 
+            `<li onclick="citylistClick('${element.Present}', '${element.DeliveryCity}')">${element.Present}</li>`;
         });
     }
 }
 
-function sendQuery(query, listUl, idInput) {
+function nvPostListWrite(data) {
+    console.log(data)
+    if(data.data) {
+        nvPostList.firstElementChild.innerHTML = ``;
+        data.data.forEach(element => {
+            nvPostList.firstElementChild.innerHTML += 
+            `<li onclick="nvPostlistClick('${element.Description}')">${element.Description}</li>`;
+        });
+    }
+}
+
+function sendQuery(query, writeList) {
     const request = new Request(requestURL, {
        method: "POST",
        body: JSON.stringify(query),
@@ -76,72 +112,19 @@ function sendQuery(query, listUl, idInput) {
      
      fetch(request)
        .then((response) => response.json())
-       .then((data) => writeList(data, listUl, idInput))
+       .then((data) => writeList(data))
        .catch(console.error);
 }
 
-// Autocomplete city by novaposhta api
-// function cityInput(idInput, idList) {
-//     const input = document.getElementById(idInput);
-//     const list = document.getElementById(idList);
-//     showList(input, list);
-//     autocomplete(input, list.children[0], queryCity, idInput);
-// }
 
-function nvPostInput(idInput, idList) {
-    const input = document.getElementById(idInput);
-    const list = document.getElementById(idList);
-    showList(input, list);
-    autocomplete(input, list.children[0], queryNvPost, idInput);
+function citylistClick(address, dc) {
+    deliveryCity = dc;
+    cityInput.value = address;
+    listsHide();
 }
 
-// function queryCity(cityName) {
-//     return {
-//         "apiKey": apiKey,
-//         "modelName": "Address",
-//         "calledMethod": "searchSettlements",
-//         "methodProperties": {
-//             "CityName" : cityName,
-//             "Limit" : LIMIT,
-//             "Page" : "1"
-//         }
-//     }
-// } 
-
-function queryNvPost(ref) {
-    return {
-        "apiKey": apiKey,
-        "modelName": "Address",
-        "calledMethod": "getWarehouses",
-        "methodProperties": {
-            // "CityName": "Васильков",
-            "CityRef" : "db5c88d9-391c-11dd-90d9-001a92567626",
-            "Page" : "1",
-            "Limit" : "50",
-            "Language" : "UA",
-        }
-    };
-}
-
-// function autocomplete(input, ul, queryObj, idInput) {
-//     input.addEventListener("input", (event) => {
-//         if (event.inputType == "insertReplacementText" || event.inputType == null) {
-//         } else {
-//             if (input.value.length > 1) {
-//                 const qery = queryObj(input.value);
-//                 clearTimeout(timeId);
-//                 timeId = setTimeout(sendQuery, 700, qery, ul, idInput);
-//             }
-//         }
-//     });
-// }
-
-
-
-
-
-function listClick(address, id) {
-    document.getElementById(id).value = address;
+function nvPostlistClick(description) {
+    nvPostInput.value = description;
     listsHide();
 }
 
@@ -165,3 +148,6 @@ function postRadio(show, hide) {
     document.getElementById(show).classList.remove("hide");
     document.getElementById(hide).classList.add("hide");
 }
+
+
+

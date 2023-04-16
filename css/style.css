@@ -3706,6 +3706,6 @@ ol {
 	display: none;
 }
 
-#ukr_post_number_list, #nv_post_number_list {
+#ukr_post_list, #nv_post_list {
 	width: calc(100% - 46px);
 }
