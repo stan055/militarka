@@ -198,7 +198,7 @@
                             <div class="checkout__input">
                                 <p>Ваше місто<span>*</span></p>
                                 <input id="city_input" type="text" placeholder="Виберіть своє місто"
-                                class="checkout__input__add" autocomplete="off"/>
+                                    class="checkout__input__add" autocomplete="off" />
                                 <div class="input-list hide" id="city_list">
                                     <ul id="city_list_ul">
                                         <li>...</li>
@@ -219,10 +219,9 @@
 
                             <!-- Radio Button  -->
                             <div class="checkout__input__checkbox">
-                                <label for="nv_post_radio">
+                                <label for="nv_post_radio" onclick="postRadio('nv_post_input', 'ukr_post_input')">
                                     Відділення Нова Пошта?
-                                    <input type="radio" name="postType" value="2" id="nv_post_radio"
-                                        onclick="postRadio('nv_post_input', 'ukr_post_input')">
+                                    <input type="radio" name="postType" value="2" id="nv_post_radio" disabled>
                                     <span class="checkmark"></span>
                                 </label>
 
@@ -241,10 +240,9 @@
 
                             <!-- Radio Button  -->
                             <div class="checkout__input__checkbox">
-                                <label for="ukr_post_radio">
+                                <label for="ukr_post_radio" onclick="postRadio('ukr_post_input', 'nv_post_input')">
                                     Відділення Укрпошта?
-                                    <input type="radio" name="postType" value="1" id="ukr_post_radio"
-                                        onclick="postRadio('ukr_post_input', 'nv_post_input')">
+                                    <input type="radio" name="postType" value="1" id="ukr_post_radio" disabled>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

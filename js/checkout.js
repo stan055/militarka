@@ -80,9 +80,6 @@ function getNvPostNumbers() {
     sendQuery(query, nvPostListWrite);
 }
 
-// Ref: "e718a680-4b33-11e4-ab6d-005056801329"
-// DeliveryCity: "8d5a980d-391c-11dd-90d9-001a92567626"
-
 function cityListWrite(data) {
     if(data.data[0].Addresses) {
         cityList.firstElementChild.innerHTML = ``;
@@ -116,11 +113,22 @@ function sendQuery(query, writeList) {
        .catch(console.error);
 }
 
-
 function citylistClick(address, dc) {
+    cityInput.classList.remove("warning");
     deliveryCity = dc;
     cityInput.value = address;
     listsHide();
+}
+
+function postRadio(show, hide) {
+    if (!deliveryCity) {
+        cityInput.classList.add("warning"); 
+        return;
+    }
+    document.getElementById("nv_post_radio").disabled = false;
+    document.getElementById("ukr_post_radio").disabled = false;
+    document.getElementById(show).classList.remove("hide");
+    document.getElementById(hide).classList.add("hide");
 }
 
 function nvPostlistClick(description) {
@@ -144,10 +152,7 @@ function showList(input, list) {
     overlay.classList.add('visible'); 
 }
 
-function postRadio(show, hide) {
-    document.getElementById(show).classList.remove("hide");
-    document.getElementById(hide).classList.add("hide");
-}
+
 
 
 
