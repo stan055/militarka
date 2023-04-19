@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCheckoutCount(cart.quantity);
     renderCheckoutSum(cart.sum);
 });
-
-
+// ---------------------- VALIDATION START ---------------------
+// Text validation start
 inputTextArr.forEach(element => {
     element.addEventListener("focusout", event => {
         if (!textLength(event.target.value))
@@ -35,23 +35,25 @@ function textLength(text) {
     if (text.length > 0) return true;
     return false; 
 }
+// Text validation end
 
-// Phone validation
+// Phone validation start
 inputPhoneEl.addEventListener("focusout", event => {
     if (!phoneValidation(event.target.value))
     inputPhoneEl.classList.add("warning");
 })
 inputPhoneEl.addEventListener("input", event => {
-    if (phoneValidation(event.target.value))
-    inputPhoneEl.classList.remove("warning");
+    const filteredArr = event.target.value.match(/\d/g) || [];
+    const filteredStr = filteredArr.join('');
+    if (phoneValidation(filteredStr))
+        inputPhoneEl.classList.remove("warning");
 })
 function phoneValidation(tel) {
-    return tel.match(
-        /^\+?3?8?(0[\s\.-]\d{2}[\s\.-]\d{3}[\s\.-]\d{2}[\s\.-]\d{2})$/
-      );
+    return tel.match(/^\+?3?8?(0[5-9][0-9]\d{7})$/);
 }
-// ----------------
-// Email validation
+// Phone validation end
+
+// Email validation start
 inputEmailEl.addEventListener("focusout", event => {
     if (!emailValidation(event.target.value))
         inputEmailEl.classList.add("warning");
@@ -65,8 +67,8 @@ function emailValidation(email) {
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 }
-// ---------------
-
+// Email validation end
+// ---------------------- VALIDATION END ---------------------
 
 function renderCheckoutCount(count) {
     document.getElementById("checkout_count").innerHTML = count;
