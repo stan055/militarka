@@ -9,6 +9,7 @@ const nvPostList = document.getElementById("nv_post_list");
 document.addEventListener("DOMContentLoaded", () => {
     const cart = new Cart();
     renderProductsTable(cart.data);
+    
 });
 
 function renderProductsTable(data) {
@@ -91,7 +92,6 @@ function cityListWrite(data) {
 }
 
 function nvPostListWrite(data) {
-    console.log(data)
     if(data.data) {
         nvPostList.firstElementChild.innerHTML = ``;
         data.data.forEach(element => {
@@ -152,7 +152,23 @@ function showList(input, list) {
     overlay.classList.add('visible'); 
 }
 
+function ukrPostApi() {
+   const url = 
+   "https://www.ukrposhta.ua/address-classifier-ws/";
+   const uri = 
+   "get_regions_by_region_ua?region_name=Kyivska";
 
+   const request = new Request(url + uri, {
+    method: "GET",
+    Accept: "application/json",
+    mode: "no-cors"
+  });
+  
+  fetch(request)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch(console.error);
+}
 
 
 
