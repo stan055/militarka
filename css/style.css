@@ -63,7 +63,7 @@
 html,
 body {
 	height: 100%;
-	font-family: "Cairo", sans-serif;
+	/* font-family: "Cairo", sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 
@@ -2139,7 +2139,7 @@ ol {
 
 .checkout__form h4 {
 	color: #1c1c1c;
-	font-weight: 700;
+	/* font-weight: 700; */
 	/* border-bottom: 1px solid #e1e1e1; */
 	padding-bottom: 20px;
 	margin-bottom: 25px;
@@ -2240,7 +2240,7 @@ ol {
 
 .checkout__order h4 {
 	color: #1c1c1c;
-	font-weight: 700;
+	/* font-weight: 700; */
 	/* border-bottom: 1px solid #e1e1e1; */
 	padding-bottom: 20px;
 	margin-bottom: 20px;
@@ -2249,7 +2249,7 @@ ol {
 .checkout__order .checkout__order__products {
 	font-size: 18px;
 	color: #1c1c1c;
-	font-weight: 700;
+	/* font-weight: 700; */
 	margin-bottom: 10px;
 }
 
@@ -2298,7 +2298,7 @@ ol {
 .checkout__order .checkout__order__total {
 	font-size: 18px;
 	color: #1c1c1c;
-	font-weight: 700;
+	/* font-weight: 700; */
 	border-bottom: 1px solid #e1e1e1;
 	padding-bottom: 15px;
 	margin-bottom: 25px;
@@ -2306,7 +2306,7 @@ ol {
 
 .checkout__order .checkout__order__total span {
 	float: right;
-	color: #dd2222;
+	/* color: var(--gray-dark); */
 }
 
 .checkout__order button {

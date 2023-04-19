@@ -260,20 +260,20 @@
                             </div>
 
                             <!-- Radio button post end-->
-
-                            <!-- Delivery end -->
                             <span class="border-line"></span>
+                            <!-- Delivery end -->
                         </div>
 
-                        <div class="col-lg-4 ">
+                        <!-- Total price begin -->
+                        <div class="col-lg-4 " >
                             <div class="checkout__order sticky-top">
                                 <h4>Разом</h4>
                                 <div class="row">
                                     <div class="col">
-                                        <p>1 товар на суму</p>
+                                        <p><span id="checkout_count">0</span> товар на суму</p>
                                     </div>
                                     <div class="col">
-                                        <p class="float-right">0.00₴</p>
+                                        <p class="float-right"><span id="checkout_sum"> 0.00 </span>&nbsp ₴</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -285,7 +285,7 @@
                                     </div>
                                 </div>
                                 <div class="border-line"></div>
-                                <div class="checkout__order__total">До сплати <span>0.00₴</span></div>
+                                <div class="checkout__order__total">До сплати <span id="checkout_total"><big>0.00 &nbsp ₴</big></span></div>
                                 <button type="submit" class="site-btn">Замовлення підтверджую</button>
                                 <div class="mt-3">
                                     <p class="mb-1">
@@ -342,12 +342,12 @@
                                             </small>
                                         </li>
                                     </ul>
-
                                 </div>
-
 
                             </div>
                         </div>
+                        <!-- Total price end -->
+
                     </div>
                 </form>
             </div>

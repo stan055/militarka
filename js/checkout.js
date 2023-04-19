@@ -9,8 +9,18 @@ const nvPostList = document.getElementById("nv_post_list");
 document.addEventListener("DOMContentLoaded", () => {
     const cart = new Cart();
     renderProductsTable(cart.data);
-    
+    renderCheckoutCount(cart.quantity);
+    renderCheckoutSum(cart.sum);
 });
+
+function renderCheckoutCount(count) {
+    document.getElementById("checkout_count").innerHTML = count;
+}
+
+function renderCheckoutSum(sum) {
+    document.getElementById("checkout_sum").innerHTML = sum.toFixed(2);
+    document.getElementById("checkout_total").innerHTML = `<big>${sum.toFixed(2)} ₴</big>`;
+}
 
 function renderProductsTable(data) {
     const tbody = document.getElementById('checkout_table_body');
