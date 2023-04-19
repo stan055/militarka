@@ -2140,7 +2140,7 @@ ol {
 .checkout__form h4 {
 	color: #1c1c1c;
 	font-weight: 700;
-	border-bottom: 1px solid #e1e1e1;
+	/* border-bottom: 1px solid #e1e1e1; */
 	padding-bottom: 20px;
 	margin-bottom: 25px;
 }
@@ -2234,14 +2234,14 @@ ol {
 
 .checkout__order {
 	background: #f5f5f5;
-	padding: 40px;
+	padding: 18px;
 	padding-top: 30px;
 }
 
 .checkout__order h4 {
 	color: #1c1c1c;
 	font-weight: 700;
-	border-bottom: 1px solid #e1e1e1;
+	/* border-bottom: 1px solid #e1e1e1; */
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 }
@@ -2259,13 +2259,16 @@ ol {
 
 .checkout__order ul {
 	margin-bottom: 12px;
+	padding-left: 1.5rem;
+
 }
 
 .checkout__order ul li {
 	font-size: 16px;
 	color: #6f6f6f;
-	line-height: 40px;
-	list-style: none;
+	/* list-style-position: inside; */
+	/* line-height: 40px; */
+	/* list-style: none; */
 }
 
 .checkout__order ul li span {
@@ -2278,7 +2281,7 @@ ol {
 	color: #1c1c1c;
 	font-weight: 700;
 	border-bottom: 1px solid #e1e1e1;
-	border-top: 1px solid #e1e1e1;
+	/* border-top: 1px solid #e1e1e1; */
 	padding-bottom: 15px;
 	margin-bottom: 15px;
 	padding-top: 15px;
