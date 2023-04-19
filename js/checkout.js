@@ -5,6 +5,11 @@ const cityList = document.getElementById("city_list");
 const overlay = document.getElementById("overlay");
 const nvPostInput = document.getElementById("nv_post_input");
 const nvPostList = document.getElementById("nv_post_list");
+const lastNameEl = document.getElementById("lastname");
+const firstNameEl = document.getElementById("firstname");
+const inputTextArr = document.querySelectorAll(".input_text");
+const inputEmailEl = document.getElementById("email");
+const inputPhoneEl = document.getElementById("phone");
 
 document.addEventListener("DOMContentLoaded", () => {
     const cart = new Cart();
@@ -12,6 +17,56 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCheckoutCount(cart.quantity);
     renderCheckoutSum(cart.sum);
 });
+
+
+inputTextArr.forEach(element => {
+    element.addEventListener("focusout", event => {
+        if (!textLength(event.target.value))
+        element.classList.add("warning");
+    });
+});
+inputTextArr.forEach(element => {
+    element.addEventListener("input", event => {
+        if (textLength(event.target.value))
+        element.classList.remove("warning");
+    });
+});
+function textLength(text) {
+    if (text.length > 0) return true;
+    return false; 
+}
+
+// Phone validation
+inputPhoneEl.addEventListener("focusout", event => {
+    if (!phoneValidation(event.target.value))
+    inputPhoneEl.classList.add("warning");
+})
+inputPhoneEl.addEventListener("input", event => {
+    if (phoneValidation(event.target.value))
+    inputPhoneEl.classList.remove("warning");
+})
+function phoneValidation(tel) {
+    return tel.match(
+        /^\+?3?8?(0[\s\.-]\d{2}[\s\.-]\d{3}[\s\.-]\d{2}[\s\.-]\d{2})$/
+      );
+}
+// ----------------
+// Email validation
+inputEmailEl.addEventListener("focusout", event => {
+    if (!emailValidation(event.target.value))
+        inputEmailEl.classList.add("warning");
+});
+inputEmailEl.addEventListener("input", event => {
+    if (emailValidation(event.target.value))
+    inputEmailEl.classList.remove("warning");
+});
+function emailValidation(email) {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}
+// ---------------
+
 
 function renderCheckoutCount(count) {
     document.getElementById("checkout_count").innerHTML = count;
