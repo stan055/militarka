@@ -21,18 +21,21 @@ document.addEventListener("DOMContentLoaded", () => {
 // Text validation start
 inputTextArr.forEach(element => {
     element.addEventListener("focusout", event => {
-        if (!textLength(event.target.value))
-        element.classList.add("warning");
+        textValidation(element);
     });
 });
 inputTextArr.forEach(element => {
     element.addEventListener("input", event => {
-        if (textLength(event.target.value))
-        element.classList.remove("warning");
+        textValidation(element);
+        
     });
 });
-function textLength(text) {
-    if (text.length > 0) return true;
+function textValidation(element) {
+    if (element.value.length > 0) {
+        element.classList.remove("warning");
+        return true;
+    }
+    element.classList.add("warning");
     return false; 
 }
 // Text validation end
@@ -113,8 +116,8 @@ nvPostInput.addEventListener("focus", event => {
     getNvPostNumbers();
 });
 
-let timeId, deliveryCity;
 // City Input Listener
+let timeId, deliveryCity;
 cityInput.addEventListener("input", event => {
     const cityName = event.target.value; 
     if (cityName.length > 1) {
@@ -188,10 +191,8 @@ function citylistClick(address, dc) {
 }
 
 function postRadio(show, hide) {
-    if (!deliveryCity) {
-        cityInput.classList.add("warning"); 
-        return;
-    }
+    if (!textValidation(cityInput)) return;
+    
     document.getElementById("nv_post_radio").disabled = false;
     document.getElementById("ukr_post_radio").disabled = false;
     document.getElementById(show).classList.remove("hide");
@@ -208,13 +209,13 @@ function listsHide() {
     // Hide all lists
     for (const element of document.getElementsByClassName("input-list")){
         element.classList.add("hide");}
-    // All inputs z-index = 1
+    // All inputs z-index
     for (const element of document.getElementsByClassName("checkout__input__add")){
-        element.style.zIndex = "1";}
+        element.classList.remove("top-index");}
 }
 
 function showList(input, list) { 
-    input.style.zIndex = "999";
+    input.classList.add("top-index");
     list.classList.remove('hide'); 
     overlay.classList.add('visible'); 
 }
