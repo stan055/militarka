@@ -5,14 +5,17 @@ const cityList = document.getElementById("city_list");
 const overlay = document.getElementById("overlay");
 const nvPostInput = document.getElementById("nv_post_input");
 const nvPostList = document.getElementById("nv_post_list");
-const lastNameEl = document.getElementById("lastname");
+
 const firstNameEl = document.getElementById("firstname");
 const inputTextArr = document.querySelectorAll(".input_text");
 const inputEmailEl = document.getElementById("email");
 const inputPhoneEl = document.getElementById("phone");
+const checkoutBtn = document.getElementById("checkout_btn");
+const radioBtnBlock = document.getElementById("radiobtn_block");
 
+let cart;
 document.addEventListener("DOMContentLoaded", () => {
-    const cart = new Cart();
+    cart = new Cart();
     renderProductsTable(cart.data);
     renderCheckoutCount(cart.quantity);
     renderCheckoutSum(cart.sum);
@@ -41,34 +44,36 @@ function textValidation(element) {
 // Text validation end
 
 // Phone validation start
-inputPhoneEl.addEventListener("focusout", event => {
-    if (!phoneValidation(event.target.value))
-    inputPhoneEl.classList.add("warning");
-})
-inputPhoneEl.addEventListener("input", event => {
-    const filteredArr = event.target.value.match(/\d/g) || [];
+inputPhoneEl.addEventListener("focusout", () => phoneValidation(inputPhoneEl));
+inputPhoneEl.addEventListener("input", () => phoneValidation(inputPhoneEl));
+function phoneValidation(element) {
+    const value = element.value;
+    const filteredArr = value.match(/\d/g) || [];
     const filteredStr = filteredArr.join('');
-    if (phoneValidation(filteredStr))
+    const regexTel = /^\+?3?8?(0[5-9][0-9]\d{7})$/;
+    if (filteredStr.match(regexTel)) {
         inputPhoneEl.classList.remove("warning");
-})
-function phoneValidation(tel) {
-    return tel.match(/^\+?3?8?(0[5-9][0-9]\d{7})$/);
+        return true;
+    } else {
+        inputPhoneEl.classList.add("warning");
+        return false;
+    }
 }
 // Phone validation end
 
 // Email validation start
-inputEmailEl.addEventListener("focusout", event => {
-    if (!emailValidation(event.target.value))
+inputEmailEl.addEventListener("focusout", () => emailValidation(inputEmailEl));
+inputEmailEl.addEventListener("input", () => emailValidation(inputEmailEl));
+function emailValidation(element) {
+    const value = element.value;
+    const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (value.match(regexEmail)) {
+        inputEmailEl.classList.remove("warning");
+        return true;
+    } else {
         inputEmailEl.classList.add("warning");
-});
-inputEmailEl.addEventListener("input", event => {
-    if (emailValidation(event.target.value))
-    inputEmailEl.classList.remove("warning");
-});
-function emailValidation(email) {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+        return false;
+    }
 }
 // Email validation end
 // ---------------------- VALIDATION END ---------------------
@@ -152,7 +157,8 @@ function getNvPostNumbers() {
 }
 
 function cityListWrite(data) {
-    if(data.data[0].Addresses) {
+    if (data.success)
+    if (data.data[0].Addresses) {
         cityList.firstElementChild.innerHTML = ``;
         data.data[0].Addresses.forEach(element => {
             cityList.firstElementChild.innerHTML += 
@@ -165,8 +171,9 @@ function nvPostListWrite(data) {
     if(data.data) {
         nvPostList.firstElementChild.innerHTML = ``;
         data.data.forEach(element => {
+            const description = element.Description.replaceAll('"','');
             nvPostList.firstElementChild.innerHTML += 
-            `<li onclick="nvPostlistClick('${element.Description}')">${element.Description}</li>`;
+            `<li onclick="nvPostlistClick('${description}')">${element.Description}</li>`;
         });
     }
 }
@@ -192,15 +199,20 @@ function citylistClick(address, dc) {
 
 function postRadio(show, hide) {
     if (!textValidation(cityInput)) return;
-    
+    radioBtnBlock.classList.remove("warning");
+    inputTextArr[3].classList.remove("warning");
+    inputTextArr[4].classList.remove("warning");
+
     document.getElementById("nv_post_radio").disabled = false;
     document.getElementById("ukr_post_radio").disabled = false;
     document.getElementById(show).classList.remove("hide");
     document.getElementById(hide).classList.add("hide");
 }
 
+// List click nova poshta
 function nvPostlistClick(description) {
     nvPostInput.value = description;
+    textValidation(nvPostInput);
     listsHide();
 }
 
@@ -238,5 +250,30 @@ function ukrPostApi() {
     .catch(console.error);
 }
 
+checkoutBtn.addEventListener("click", event => {
+    let isValid = true;
+    // Validate all
+    try {
+        if (!textValidation(inputTextArr[0])) isValid = false;
+        if (!textValidation(inputTextArr[1])) isValid = false;
+        if (!phoneValidation(inputPhoneEl)) isValid = false;
+        if (!emailValidation(inputEmailEl)) isValid = false;
+        if (cart.data.length == 0) isValid = false;
+        if (!textValidation(inputTextArr[2])) isValid = false;
+        if (!textValidation(inputTextArr[3]) && !textValidation(inputTextArr[4])) {
+            radioBtnBlock.classList.add("warning");
+            isValid = false;
+        } 
+    } catch (error) {
+        console.log(error);
+        return;
+    }
 
+    
+    // Send mail
+    if (isValid) {
+        console.log('send mail')
+    }
+    // Route final checkout page
 
+});
