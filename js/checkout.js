@@ -12,6 +12,8 @@ const inputEmailEl = document.getElementById("email");
 const inputPhoneEl = document.getElementById("phone");
 const checkoutBtn = document.getElementById("checkout_btn");
 const radioBtnBlock = document.getElementById("radiobtn_block");
+const ukrPostEl = document.getElementById('ukr_post_radio');
+const nvPostEl = document.getElementById('nv_post_radio');
 
 let cart;
 document.addEventListener("DOMContentLoaded", () => {
@@ -132,29 +134,13 @@ cityInput.addEventListener("input", event => {
             "calledMethod": "searchSettlements",
             "methodProperties": {
                 "CityName" : cityName,
-                "Limit" : 50,
+                "Limit" : "50",
                 "Page" : "1"
             }};
         clearTimeout(timeId);
         timeId = setTimeout(sendQuery, 700, query, cityListWrite);
     }
 });
-
-function getNvPostNumbers() {
-    const query =  {
-        "apiKey": apiKey,
-        "modelName": "Address",
-        "calledMethod": "getWarehouses",
-        "methodProperties": {
-            // "CityName": "Васильків",
-            "CityRef" : deliveryCity,
-            "Page" : "1",
-            "Limit" : "300",
-            "Language" : "UA",
-        }
-    };
-    sendQuery(query, nvPostListWrite);
-}
 
 function cityListWrite(data) {
     if (data.success)
@@ -165,6 +151,29 @@ function cityListWrite(data) {
             `<li onclick="citylistClick('${element.Present}', '${element.DeliveryCity}')">${element.Present}</li>`;
         });
     }
+}
+// City list click
+function citylistClick(address, dc) {
+    cityInput.classList.remove("warning");
+    deliveryCity = dc;
+    cityInput.value = address;
+    listsHide();
+}
+
+// Send query Nova Poshta post numbers
+function getNvPostNumbers() {
+    const query =  {
+        "apiKey": apiKey,
+        "modelName": "Address",
+        "calledMethod": "getWarehouses",
+        "methodProperties": {
+            "CityRef" : deliveryCity,
+            "Page" : "1",
+            "Limit" : "350",
+            "Language" : "UA",
+        }
+    };
+    sendQuery(query, nvPostListWrite);
 }
 
 function nvPostListWrite(data) {
@@ -190,13 +199,6 @@ function sendQuery(query, writeList) {
        .catch(console.error);
 }
 
-function citylistClick(address, dc) {
-    cityInput.classList.remove("warning");
-    deliveryCity = dc;
-    cityInput.value = address;
-    listsHide();
-}
-
 function postRadio(show, hide) {
     if (!textValidation(cityInput)) return;
     radioBtnBlock.classList.remove("warning");
@@ -209,7 +211,7 @@ function postRadio(show, hide) {
     document.getElementById(hide).classList.add("hide");
 }
 
-// List click nova poshta
+// Nova poshta list click
 function nvPostlistClick(description) {
     nvPostInput.value = description;
     textValidation(nvPostInput);
@@ -249,6 +251,38 @@ function ukrPostApi() {
     .then((data) => console.log(data))
     .catch(console.error);
 }
+// return radio button checked value or false
+function checkedRadioBtn(name) {
+    let rad = document.getElementsByName(name);
+    for (let i=0; i < rad.length; i++) {
+      if (rad[i].checked) {
+        return rad[i].value;
+      }
+    }
+    return false;
+}
+// return post address
+function address(postType) {
+    if (postType == 'Нова Пошта') {
+        return nvPostEl.value;
+    } else if (postType == 'Укрпошта') {
+        return ukrPostEl.value;
+    } else return 'Відсутня';
+}
+// Array edited products for mail
+function mailProducts(data) {
+    const result = [];
+    data.forEach(el => {
+        obj = {
+            'назва': el.name,
+            'id': el.id,
+            'кількість': el.numberOfUnits,
+            'ціна': el.price,
+        }
+        result.push(obj);
+    })
+    return result;
+}
 
 checkoutBtn.addEventListener("click", event => {
     let isValid = true;
@@ -271,8 +305,19 @@ checkoutBtn.addEventListener("click", event => {
 
     
     // Send mail
-    if (isValid) {
-        console.log('send mail')
+    if (!isValid) {
+        mail = {
+            "Фамілія": inputTextArr[0].value,
+            "Імя": inputTextArr[1].value,
+            "Телефон": inputPhoneEl.value,
+            "Емеіл": inputEmailEl.value,
+            "Місто": cityInput.value,
+            "Пошта": checkedRadioBtn('postType'),
+            "Адресса": address(checkedRadioBtn('postType')), 
+            "Замовлення": mailProducts(cart.data),
+            "Сумма":  cart.sum
+        }
+        console.log(mail)
     }
     // Route final checkout page
 
