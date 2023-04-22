@@ -12,8 +12,8 @@ const inputEmailEl = document.getElementById("email");
 const inputPhoneEl = document.getElementById("phone");
 const checkoutBtn = document.getElementById("checkout_btn");
 const radioBtnBlock = document.getElementById("radiobtn_block");
-const ukrPostEl = document.getElementById('ukr_post_radio');
-const nvPostEl = document.getElementById('nv_post_radio');
+const ukrPostEl = document.getElementById('ukr_post_input');
+const nvPostEl = document.getElementById('nv_post_input');
 
 let cart;
 document.addEventListener("DOMContentLoaded", () => {
@@ -252,7 +252,7 @@ function ukrPostApi() {
     .catch(console.error);
 }
 // return radio button checked value or false
-function checkedRadioBtn(name) {
+function getCheckedRadio(name) {
     let rad = document.getElementsByName(name);
     for (let i=0; i < rad.length; i++) {
       if (rad[i].checked) {
@@ -262,7 +262,7 @@ function checkedRadioBtn(name) {
     return false;
 }
 // return post address
-function address(postType) {
+function getAddress(postType) {
     if (postType == 'Нова Пошта') {
         return nvPostEl.value;
     } else if (postType == 'Укрпошта') {
@@ -270,7 +270,7 @@ function address(postType) {
     } else return 'Відсутня';
 }
 // Array edited products for mail
-function mailProducts(data) {
+function getProducts(data) {
     const result = [];
     data.forEach(el => {
         obj = {
@@ -305,16 +305,16 @@ checkoutBtn.addEventListener("click", event => {
 
     
     // Send mail
-    if (!isValid) {
+    if (isValid) {
         mail = {
             "Фамілія": inputTextArr[0].value,
             "Імя": inputTextArr[1].value,
             "Телефон": inputPhoneEl.value,
             "Емеіл": inputEmailEl.value,
             "Місто": cityInput.value,
-            "Пошта": checkedRadioBtn('postType'),
-            "Адресса": address(checkedRadioBtn('postType')), 
-            "Замовлення": mailProducts(cart.data),
+            "Пошта": getCheckedRadio('postType'),
+            "Відділення": getAddress(checkedRadioBtn('postType')), 
+            "Замовлення": getProducts(cart.data),
             "Сумма":  cart.sum
         }
         console.log(mail)
