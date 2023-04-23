@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCheckoutCount(cart.quantity);
     renderCheckoutSum(cart.sum);
 });
+
 // ---------------------- VALIDATION START ---------------------
 // Text validation start
 inputTextArr.forEach(element => {
@@ -269,56 +270,43 @@ function getAddress(postType) {
         return ukrPostEl.value;
     } else return 'Відсутня';
 }
-// Array edited products for mail
-function getProducts(data) {
-    const result = [];
-    data.forEach(el => {
-        obj = {
-            'назва': el.name,
-            'id': el.id,
-            'кількість': el.numberOfUnits,
-            'ціна': el.price,
-        }
-        result.push(obj);
-    })
-    return result;
-}
 
-checkoutBtn.addEventListener("click", event => {
-    let isValid = true;
-    // Validate all
+function validateAll() {
     try {
-        if (!textValidation(inputTextArr[0])) isValid = false;
-        if (!textValidation(inputTextArr[1])) isValid = false;
-        if (!phoneValidation(inputPhoneEl)) isValid = false;
-        if (!emailValidation(inputEmailEl)) isValid = false;
-        if (cart.data.length == 0) isValid = false;
-        if (!textValidation(inputTextArr[2])) isValid = false;
+        if (!textValidation(inputTextArr[0])) return false;
+        if (!textValidation(inputTextArr[1])) return false;
+        if (!phoneValidation(inputPhoneEl)) return false;
+        if (!emailValidation(inputEmailEl)) return false;
+        if (cart.data.length == 0) return false;
+        if (!textValidation(inputTextArr[2])) return false;
         if (!textValidation(inputTextArr[3]) && !textValidation(inputTextArr[4])) {
             radioBtnBlock.classList.add("warning");
-            isValid = false;
+            return false;
         } 
     } catch (error) {
         console.log(error);
-        return;
+        return false;
     }
-
+    return true;
+}
+checkoutBtn.addEventListener("click", event => {
+    let isValid = validateAll();
     
     // Send mail
     if (isValid) {
-        mail = {
-            "Фамілія": inputTextArr[0].value,
-            "Імя": inputTextArr[1].value,
-            "Телефон": inputPhoneEl.value,
-            "Емеіл": inputEmailEl.value,
-            "Місто": cityInput.value,
-            "Пошта": getCheckedRadio('postType'),
-            "Відділення": getAddress(checkedRadioBtn('postType')), 
-            "Замовлення": getProducts(cart.data),
-            "Сумма":  cart.sum
-        }
-        console.log(mail)
+        htmlMail = `
+            <p>Фамілія: ${inputTextArr[0].value}</p>
+            <P>Імя: ${inputTextArr[1].value}</P>
+            <P>Телефон: ${inputPhoneEl.value}</P>
+            <p>Емеіл: ${inputEmailEl.value}</p>
+            <p>Місто: ${cityInput.value}</p>
+            <p>Пошта: ${getCheckedRadio('postType')}</p>
+            <p>Відділення: ${getAddress(getCheckedRadio('postType'))}</p>
+            <h3>Замовлення: ${productsHtml(cart.data)}</h3>
+            <h2>Сумма: ${cart.sum} ₴</h2>
+        `;
+        sendEmail('Замовлення Ogani', htmlMail);
     }
     // Route final checkout page
-
+    
 });
