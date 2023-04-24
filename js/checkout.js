@@ -6,7 +6,6 @@ const overlay = document.getElementById("overlay");
 const nvPostInput = document.getElementById("nv_post_input");
 const nvPostList = document.getElementById("nv_post_list");
 
-const firstNameEl = document.getElementById("firstname");
 const inputTextArr = document.querySelectorAll(".input_text");
 const inputEmailEl = document.getElementById("email");
 const inputPhoneEl = document.getElementById("phone");
