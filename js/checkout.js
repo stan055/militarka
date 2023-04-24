@@ -231,16 +231,34 @@ function getCheckedRadio(name) {
 function validationAll() {
     let isValid = true;
     try {
-        if (!textValidation(inputTextArr[0])) isValid = false;
-        if (!textValidation(inputTextArr[1])) isValid = false;
-        if (!phoneValidation(inputPhoneEl)) isValid = false;
-        if (!emailValidation(inputEmailEl)) isValid = false;
-        if (cart.data.length == 0) isValid = false;
-        if (!textValidation(inputTextArr[2])) isValid = false;
         if (!validationRadioBlock(inputTextArr[3],inputTextArr[4])) {
             radioBtnBlock.classList.add("warning");
+            radioBtnBlock.scrollIntoView({ block: "center"});
             isValid = false;
-        } 
+        }
+        if (!textValidation(inputTextArr[2])) {
+            isValid = false;
+            inputTextArr[2].scrollIntoView({ block: "center"});
+        }
+        if (cart.data.length == 0) {
+            isValid = false;
+        }
+        if (!emailValidation(inputEmailEl)) {
+            isValid = false;
+            inputEmailEl.scrollIntoView({ block: "center"});
+        }
+        if (!phoneValidation(inputPhoneEl)) {
+            isValid = false;
+            inputPhoneEl.scrollIntoView({ block: "center"});
+        }
+        if (!textValidation(inputTextArr[1])) {
+            isValid = false;
+            inputTextArr[1].scrollIntoView({ block: "center"});
+        }
+        if (!textValidation(inputTextArr[0])) {
+            isValid = false;
+            inputTextArr[0].scrollIntoView({ block: "center"});
+        }
     } catch (error) {
         console.log(error);
         return false;
