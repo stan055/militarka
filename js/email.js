@@ -1,7 +1,7 @@
 function sendEmail() {
     const date = new Date();
     const dateStr = date.toLocaleString();
-    const orderId = `${date.getHours()}${date.getMinutes()}${Math.floor(Math.random()*99)}`;
+    const orderId = orderId(date);
     const htmlMail = `
         <p>Дата: ${dateStr}</p>
         <p>Фамілія: ${inputTextArr[0].value}</p>
@@ -24,6 +24,10 @@ function sendEmail() {
         Subject : `Замовлення №${orderId}`,
         Body : htmlMail
     });
+}
+
+function orderId(date) {
+    return `${date.getHours()}${date.getMinutes()}${Math.floor(Math.random()*99)}`;
 }
 
 // Create product table
