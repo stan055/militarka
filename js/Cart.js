@@ -108,5 +108,10 @@ class Cart {
         return  this.data.reduce((accumulator, product) => 
         (accumulator + product.numberOfUnits), 0);
     }
+
+    clear() {
+        localStorage.clear();
+        this.data = [];
+    }
 }
 

@@ -1,5 +1,9 @@
 function sendEmail() {
+    const date = new Date();
+    const dateStr = date.toLocaleString();
+    const orderId = `${date.getHours()}${date.getMinutes()}${Math.floor(Math.random()*99)}`;
     const htmlMail = `
+        <p>Дата: ${dateStr}</p>
         <p>Фамілія: ${inputTextArr[0].value}</p>
         <P>Імя: ${inputTextArr[1].value}</P>
         <P>Телефон: ${inputPhoneEl.value}</P>
@@ -11,17 +15,15 @@ function sendEmail() {
         <h2>Сумма: ${cart.sum} ₴</h2>
     `;
 
-    Email.send({
+    return Email.send({
         Host : "smtp.elasticemail.com",
         Username : "stanislav055@gmail.com",
         Password : "4A7CD0EF3652ACE5A760A84FB6DB24CE3A55",
         To : 'stanislav055@gmail.com',
         From : "stanislav055@gmail.com",
-        Subject : 'Замовлення Ogani',
+        Subject : `Замовлення №${orderId}`,
         Body : htmlMail
-    }).then(
-      message => alert(message)
-    );
+    });
 }
 
 // Create product table

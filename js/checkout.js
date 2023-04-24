@@ -271,8 +271,17 @@ checkoutBtn.addEventListener("click", event => {
     let isValid = validationAll();
     // Send mail
     if (isValid) {
-        sendEmail();
-    }
-    // Route final checkout page
-    
+        sendEmail()
+        .then(message => {
+            if (message == 'OK') {
+                console.log('OK');
+                // cart.clear();
+                // Route final checkout page
+                // document.location.href = newUrl;
+            } else {
+                console.log('Send Mail Error');
+            }
+        });
+    }  
+
 });
