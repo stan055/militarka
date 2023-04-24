@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCheckoutSum(cart.sum);
 });
 
-// ---------------------- VALIDATION START ---------------------
-// Text validation start
+// Text validation
 inputTextArr.forEach(element => {
     element.addEventListener("focusout", event => {
         textValidation(element);
@@ -36,50 +35,16 @@ inputTextArr.forEach(element => {
         
     });
 });
-function textValidation(element) {
-    if (element.value.length > 0) {
-        element.classList.remove("warning");
-        return true;
-    }
-    element.classList.add("warning");
-    return false; 
-}
-// Text validation end
 
-// Phone validation start
+
+// Phone validation 
 inputPhoneEl.addEventListener("focusout", () => phoneValidation(inputPhoneEl));
 inputPhoneEl.addEventListener("input", () => phoneValidation(inputPhoneEl));
-function phoneValidation(element) {
-    const value = element.value;
-    const filteredArr = value.match(/\d/g) || [];
-    const filteredStr = filteredArr.join('');
-    const regexTel = /^\+?3?8?(0[5-9][0-9]\d{7})$/;
-    if (filteredStr.match(regexTel)) {
-        inputPhoneEl.classList.remove("warning");
-        return true;
-    } else {
-        inputPhoneEl.classList.add("warning");
-        return false;
-    }
-}
-// Phone validation end
 
-// Email validation start
+
+// Email validation 
 inputEmailEl.addEventListener("focusout", () => emailValidation(inputEmailEl));
 inputEmailEl.addEventListener("input", () => emailValidation(inputEmailEl));
-function emailValidation(element) {
-    const value = element.value;
-    const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (value.match(regexEmail)) {
-        inputEmailEl.classList.remove("warning");
-        return true;
-    } else {
-        inputEmailEl.classList.add("warning");
-        return false;
-    }
-}
-// Email validation end
-// ---------------------- VALIDATION END ---------------------
 
 function renderCheckoutCount(count) {
     document.getElementById("checkout_count").innerHTML = count;
@@ -262,50 +227,33 @@ function getCheckedRadio(name) {
     }
     return false;
 }
-// return post address
-function getAddress(postType) {
-    if (postType == 'Нова Пошта') {
-        return nvPostEl.value;
-    } else if (postType == 'Укрпошта') {
-        return ukrPostEl.value;
-    } else return 'Відсутня';
-}
 
-function validateAll() {
+function validationAll() {
+    let isValid = true;
     try {
-        if (!textValidation(inputTextArr[0])) return false;
-        if (!textValidation(inputTextArr[1])) return false;
-        if (!phoneValidation(inputPhoneEl)) return false;
-        if (!emailValidation(inputEmailEl)) return false;
-        if (cart.data.length == 0) return false;
-        if (!textValidation(inputTextArr[2])) return false;
-        if (!textValidation(inputTextArr[3]) && !textValidation(inputTextArr[4])) {
+        if (!textValidation(inputTextArr[0])) isValid = false;
+        if (!textValidation(inputTextArr[1])) isValid = false;
+        if (!phoneValidation(inputPhoneEl)) isValid = false;
+        if (!emailValidation(inputEmailEl)) isValid = false;
+        if (cart.data.length == 0) isValid = false;
+        if (!textValidation(inputTextArr[2])) isValid = false;
+        if (!validationRadioBlock(inputTextArr[3],inputTextArr[4])) {
             radioBtnBlock.classList.add("warning");
-            return false;
+            isValid = false;
         } 
     } catch (error) {
         console.log(error);
         return false;
     }
-    return true;
+    return isValid;
 }
+
 checkoutBtn.addEventListener("click", event => {
-    let isValid = validateAll();
-    
+    // Validation form
+    let isValid = validationAll();
     // Send mail
     if (isValid) {
-        htmlMail = `
-            <p>Фамілія: ${inputTextArr[0].value}</p>
-            <P>Імя: ${inputTextArr[1].value}</P>
-            <P>Телефон: ${inputPhoneEl.value}</P>
-            <p>Емеіл: ${inputEmailEl.value}</p>
-            <p>Місто: ${cityInput.value}</p>
-            <p>Пошта: ${getCheckedRadio('postType')}</p>
-            <p>Відділення: ${getAddress(getCheckedRadio('postType'))}</p>
-            <h3>Замовлення: ${productsHtml(cart.data)}</h3>
-            <h2>Сумма: ${cart.sum} ₴</h2>
-        `;
-        sendEmail('Замовлення Ogani', htmlMail);
+        sendEmail();
     }
     // Route final checkout page
     

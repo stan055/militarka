@@ -223,7 +223,7 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="nv_post_radio" onclick="postRadio('nv_post_input', 'ukr_post_input')">
                                         Відділення Нова Пошта?
-                                        <input type="radio" name="postType" value="Нова Пошта" id="nv_post_radio" disabled>
+                                        <input type="radio" name="postType" value="Новапошта" id="nv_post_radio" disabled>
                                         <span class="checkmark"></span>
                                     </label>
 
@@ -231,7 +231,7 @@
 
                                 <!-- Input -->
                                 <div class="checkout__input ml-3">
-                                    <input id="nv_post_input" type="text" placeholder="Виберіть відповідне відділення"
+                                    <input id="nv_post_input" type="text" name="Новапошта" placeholder="Виберіть відповідне відділення"
                                         class="checkout__input__add hide input_text" autocomplete="off">
                                     <div class="input-list hide" id="nv_post_list">
                                         <ul id="nv_post_list_ul">
@@ -251,7 +251,7 @@
 
                                 <!-- Input -->
                                 <div class="checkout__input ml-3">
-                                    <input id="ukr_post_input" type="text" placeholder="Виберіть відповідне відділення"
+                                    <input id="ukr_post_input" type="text" name="Укрпошта" placeholder="Виберіть відповідне відділення"
                                         class="checkout__input__add hide input_text" autocomplete="off">
                                     <div class="input-list hide" id="ukr_post_list">
                                         <ul id="ukr_post_list_ul">
@@ -443,6 +443,7 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="js/email.js"></script>
     <script src="js/checkout.js"></script>
+    <script src="js/validation.js"></script>
 
 </body>
 

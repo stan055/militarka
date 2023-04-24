@@ -1,19 +1,31 @@
-function sendEmail(subject, body) {
+function sendEmail() {
+    const htmlMail = `
+        <p>Фамілія: ${inputTextArr[0].value}</p>
+        <P>Імя: ${inputTextArr[1].value}</P>
+        <P>Телефон: ${inputPhoneEl.value}</P>
+        <p>Емеіл: ${inputEmailEl.value}</p>
+        <p>Місто: ${cityInput.value}</p>
+        <p>Пошта: ${getCheckedRadio('postType')}</p>
+        <p>Відділення: ${getPostAddress(getCheckedRadio('postType'),nvPostEl, ukrPostEl)}</p>
+        <h3>Замовлення: ${productsTable(cart.data)}</h3>
+        <h2>Сумма: ${cart.sum} ₴</h2>
+    `;
+
     Email.send({
         Host : "smtp.elasticemail.com",
         Username : "stanislav055@gmail.com",
         Password : "4A7CD0EF3652ACE5A760A84FB6DB24CE3A55",
-        To : 'tortugatk500@gmail.com',
+        To : 'stanislav055@gmail.com',
         From : "stanislav055@gmail.com",
-        Subject : subject,
-        Body : body
+        Subject : 'Замовлення Ogani',
+        Body : htmlMail
     }).then(
       message => alert(message)
     );
 }
 
-// Create product table for mail
-function productsHtml(data) {
+// Create product table
+function productsTable(data) {
   let resultHtml = 
   `<table><tbody>
       <tr>
@@ -47,4 +59,13 @@ function productsHtml(data) {
   })
   resultHtml += `</tbody></table>`;
   return resultHtml;
+}
+
+// return post address or Відсутня
+function getPostAddress(postType, ...inputs) {
+    let postAddress = 'Відсутня';
+    inputs.forEach(element => {
+        if (element.name == postType) postAddress = element.value;
+    });
+    return postAddress;
 }
