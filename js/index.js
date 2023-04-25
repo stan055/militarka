@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderHeader(data.info);
         renderHeroMenu(data.categories);
         setHeroBanner(data);
-        categoriesSlider(data);
+        categorySlider(data);
         featuredProduct(data);
         vertivalSlidersStart(data);
         blogInteresting(data);
@@ -199,7 +199,7 @@ function featuredProduct(data) {
 }
 
 // Slider of categories
-function categoriesSlider(data) {
+function categorySlider(data) {
     const categoriesSlider = document.querySelector('.categories__slider');
     categoriesSlider.innerHTML = ``;
 
@@ -210,8 +210,8 @@ function categoriesSlider(data) {
                 <div class="col-lg-3">
                 <div class="categories__item" 
                     style="background-size: cover;
-                           background-image: url(&quot;${product.imgSrc}&quot;);">
-                    <h5><a href="#">${category[1]}</a></h5>
+                           background-image: url(&quot;${product.imgSrc[0]}&quot;);">
+                    <h5><a href="${document.location.origin}/shop-grid.html?category=${category[0]}">${category[1]}</a></h5>
                 </div>
                 </div>
             `;
