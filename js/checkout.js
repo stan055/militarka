@@ -276,11 +276,10 @@ checkoutBtn.addEventListener("click", event => {
                 console.log('OK');
                 // cart.clear();
                 // Route final checkout page
-                // document.location.href = newUrl;
+                document.location.href = 'http://127.0.0.1:5501/checkout-result.html';
             } else {
                 console.log('Send Mail Error');
             }
         });
     }  
-
 });

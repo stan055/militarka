@@ -1,7 +1,7 @@
 function sendEmail() {
     const date = new Date();
     const dateStr = date.toLocaleString();
-    const orderId = orderId(date);
+    const id = orderId(date);
     const htmlMail = `
         <p>Дата: ${dateStr}</p>
         <p>Фамілія: ${inputTextArr[0].value}</p>
@@ -21,7 +21,7 @@ function sendEmail() {
         Password : "4A7CD0EF3652ACE5A760A84FB6DB24CE3A55",
         To : 'stanislav055@gmail.com',
         From : "stanislav055@gmail.com",
-        Subject : `Замовлення №${orderId}`,
+        Subject : `Замовлення №${id}`,
         Body : htmlMail
     });
 }
