@@ -98,7 +98,7 @@ function verticalSliderRenderHtml(array) {
             html += `
             <a href="#" class="latest-product__item">
             <div class="latest-product__item__pic">
-                <img src="${array[index].imgSrc}" alt="">
+                <img src="${array[index].imgSrc[0]}" alt="">
             </div>
             <div class="latest-product__item__text">
                 <h6>${array[index].name}</h6>
@@ -208,12 +208,15 @@ function categorySlider(data) {
         if (product) {
             categoriesSlider.innerHTML += `
                 <div class="col-lg-3">
-                <div class="categories__item" 
-                    style="background-size: cover;
-                           background-image: url(&quot;${product.imgSrc[0]}&quot;);">
-                    <h5><a href="${document.location.origin}/shop-grid.html?category=${category[0]}">${category[1]}</a></h5>
+                <div>    
+                <a href="${document.location.origin}/shop-grid.html?category=${category[0]}">
+                    <img style="object-fit: cover;"  src='${product.imgSrc[0]}'></img>
+                    <a href="${document.location.origin}/shop-grid.html?category=${category[0]}">
+                    <h5>${category[1]}</h5>
+                    </a>
+                    </div>
                 </div>
-                </div>
+                
             `;
         }
     });
@@ -233,19 +236,18 @@ function categorySlider(data) {
 
 // Set Home Hero Banner
 function setHeroBanner(data) {
-    const saleLastItem = data.products.findLast(element => element.category == 'sale');
-
-    if (saleLastItem === undefined) return;
+    const product = data.products.findLast(element => element.category == 'sale');
+    if (product === undefined) return;
     else {
         const heroBannerDiv = document.querySelector('#home_page_slider');
-        const arrayWords = saleLastItem.name.split(' ');
+        const arrayWords = product.name.split(' ');
         const firstWord = arrayWords.shift();
         const secondWordS = arrayWords.join(' ');
-
+        const href = `${document.location.origin}/product.html?id=${product.id}`
         heroBannerDiv.outerHTML = `
-            <div class="hero__item set-bg" data-setbg="${saleLastItem.imgSrc}" 
+            <div class="hero__item set-bg" data-setbg="${product.imgSrc}" 
             style="
-                background-image: url(&quot;${saleLastItem.imgSrc}&quot;);
+                background-image: url(&quot;${product.imgSrc}&quot;);
             ">
                 <div class="hero__text" 
                 style="border-radius: 50%; 
@@ -254,7 +256,7 @@ function setHeroBanner(data) {
                     <span"></span>
                     <h2>${firstWord} <br />${secondWordS}</h2>
                     <p>Розпродаж. Встигніть замовити</p>
-                    <a href="#" class="primary-btn">ЗАМОВИТИ</a>
+                    <a href="${href}" class="primary-btn">ЗАМОВИТИ</a>
                 </div>
             </div>
         `;
