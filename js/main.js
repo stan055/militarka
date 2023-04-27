@@ -201,21 +201,21 @@ function productDetailsPicSliderImg() {
 }
 
 // Render header info
-function renderHeader(info) {
-    const headerTopLeft = document.querySelector(".header__top__left > ul");
-    const humbergerMenuContact = document.querySelector(".humberger__menu__contact > ul");
-    const heroSearchPhoneText = document.querySelector(".hero__search__phone__text");
-    const headerLogo = document.querySelector('.header__logo');
+// function renderHeader(info) {
+//     const headerTopLeft = document.querySelector(".header__top__left > ul");
+//     const humbergerMenuContact = document.querySelector(".humberger__menu__contact > ul");
+//     const heroSearchPhoneText = document.querySelector(".hero__search__phone__text");
+//     const headerLogo = document.querySelector('.header__logo');
 
-    try {
-        headerTopLeft.innerHTML = `<li><i class="fa fa-envelope"></i> ${info.email}</li><li>${info.free_shipping}</li>`;
-        humbergerMenuContact.innerHTML = `<li><i class="fa fa-envelope"></i> ${info.email}</li><li>${info.free_shipping}</li>`;
-        heroSearchPhoneText.innerHTML = `<h5>${info.tel}</h5><span>працюємо 7/7 днів</span>`;
-        headerLogo.innerHTML = `<a href="./index.html"><span>${info.header_logo}</span></a>`;
-    } catch (error) {
-        console.log(error);
-    }
-}
+//     try {
+//         headerTopLeft.innerHTML = `<li><i class="fa fa-envelope"></i> ${info.email}</li><li>${info.free_shipping}</li>`;
+//         humbergerMenuContact.innerHTML = `<li><i class="fa fa-envelope"></i> ${info.email}</li><li>${info.free_shipping}</li>`;
+//         heroSearchPhoneText.innerHTML = `<h5>${info.tel}</h5><span>працюємо 7/7 днів</span>`;
+//         headerLogo.innerHTML = `<a href="./index.html"><span>${info.header_logo}</span></a>`;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 // Render hero menu categories 
 function renderHeroMenu(categories) {

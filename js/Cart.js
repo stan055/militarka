@@ -2,26 +2,29 @@
 class Cart {
     
     constructor() {
-        this.data = JSON.parse(localStorage.getItem("CART")) || [];
+        this.data = this.localData();
         this.headerCart = document.querySelectorAll(".shopping-cart-li");
-        this.headerPartPrice = document.querySelectorAll(".header__cart__price");
+        this.headerSum = document.querySelectorAll(".header__cart__price");
         this.render();
     }
     
     // Set cart.length to head icon
     render() {
-        const totalPrice = this.sum.toFixed(2);
-        
-        this.headerCart.forEach(element => {
-            element.innerHTML = `            
-            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>${this.data.length}</span></a></li>
-        `
-        });
-        this.headerPartPrice.forEach(element => {
-            element.innerHTML = `
-                прайс: <span>${totalPrice}₴</span>
-            `;
-        });
+        try {
+            const totalPrice = this.sum.toFixed(2);
+            this.headerCart.forEach(element => {
+                element.innerHTML = `            
+                <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i><span>${this.data.length}</span></a></li>`;
+            });
+            this.headerSum.forEach(element => {
+                element.innerHTML = `
+                    сумма: <span>${totalPrice}₴</span>
+                `;
+            });           
+        } catch (error) {
+            console.log('Catch Error => Cart.render()', error);            
+        }
+
     };
     
     // Save data to local storage
@@ -112,6 +115,10 @@ class Cart {
     clear() {
         localStorage.clear();
         this.data = [];
+    }
+
+    localData() {
+        return JSON.parse(localStorage.getItem("CART")) || [];
     }
 }
 

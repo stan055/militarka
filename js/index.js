@@ -1,9 +1,8 @@
-
+let cart;
 document.addEventListener("DOMContentLoaded", () => {
-    
     getData('./database.json')
-    .then((data) => {
-        renderHeader(data.info);
+    .then((data) => {       
+        renderHeader('header', data.info);
         renderHeroMenu(data.categories);
         setHeroBanner(data);
         categorySlider(data); // Render category-slider.js
@@ -11,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         vertivalSlidersStart(data);
         blogInteresting(data);
         bottonRender(data.info);
-    })
-    .then(() => {
-        const cart = new Cart();
+        cart = new Cart();
     });
     
 });

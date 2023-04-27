@@ -45,7 +45,7 @@ function featuredProduct(data) {
                         <img src="${product.imgSrc[0]}"></img>
                     </a>
                     <ul class="featured__item__pic__hover">
-                        <li><a style="z-index: 2;" href="#"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
