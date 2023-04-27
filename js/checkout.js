@@ -270,13 +270,13 @@ checkoutBtn.addEventListener("click", event => {
     let isValid = validationAll();
     // Send mail
     if (isValid) {
-        sendEmail()
+        sendEmail() // send-email.js
         .then(message => {
             if (message == 'OK') {
                 console.log('OK');
                 // cart.clear();
                 // Route final checkout page
-                document.location.href = `${document.location.origin}/checkout-result.html`;
+                document.location.href = `./checkout-result.html`;
             } else {
                 console.log('Send Mail Error');
             }

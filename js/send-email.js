@@ -46,7 +46,7 @@ function productsTable(data) {
       resultHtml += `
           <tr>
               <td style='padding: 1rem;'>
-                  <a href='http://127.0.0.1:5501/product.html?id=${el.id}'>${el.name}</a>
+                  <a href='${document.location.origin}/product.html?id=${el.id}'>${el.name}</a>
               </td>
               <td style='padding: 1rem;'>
                   <span>${el.id} </span>

@@ -11,7 +11,7 @@ function categorySlider(data) {
     });
 
     function render (product, categoryKey, categoryText) {
-        const href=`${document.location.origin}/shop-grid.html?category=${categoryKey}`;
+        const href=`./shop-grid.html?category=${categoryKey}`;
         return `
             <div class="col-lg-3">
             <div style="height: 260px; display:flex;align-items: center;">    
