@@ -34,26 +34,27 @@ function featuredProduct(data) {
     // Set Fetured Products  Items
     rowFeaturedFilter.innerHTML = ``;
     randoms.forEach(index => {
-        const href = `./product.html?id=${data.products[index].id}`;
-        onclick="${href}";
+        const product = data.products[index];
+        const href = `./product.html?id=${product.id}`;
         rowFeaturedFilter.innerHTML += `
-        <div class="col-lg-3 col-md-4 col-sm-6 mix ${data.products[index].category}">
-        <div class="featured__item">
-        <div class="featured__item__pic set-bg" 
-        style="background-image: url(${data.products[index].imgSrc[0]});
-        cursor: pointer;" 
-        onclick="window.location='${href}'">
-        <ul class="featured__item__pic__hover">
-        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-        </ul>
-        </div>
-        <div class="featured__item__text">
-        <h6><a href='${href}'>${data.products[index].name}</a></h6>
-        <h5>${data.products[index].price}₴</h5>
-        </div>
-        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mix ${product.category}">
+            <div class="featured__item">
+                <div class="featured__item__pic set-bg" 
+                style="display:flex;align-items:center;height:260px;">
+                    <a href="${href}">
+                        <img src="${product.imgSrc[0]}"></img>
+                    </a>
+                    <ul class="featured__item__pic__hover">
+                        <li><a style="z-index: 2;" href="#"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                <div class="featured__item__text">
+                <h6><a href='${href}'>${product.name}</a></h6>
+                <h5>${product.price}₴</h5>
+                </div>
+            </div>
         </div>
         `;
     });
