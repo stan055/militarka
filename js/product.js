@@ -7,7 +7,8 @@ const tableBody = document.querySelector('.shoping__cart__table > table > tbody'
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    getDatabase().then(data => {
+    getData('./database.json').then(data => {
+
         renderHeader(data.info);
         renderHeroMenu(data.categories);
 

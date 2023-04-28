@@ -1,6 +1,7 @@
-let cart;
+let cart, database;
 document.addEventListener("DOMContentLoaded", () => {
-    getData('./database.json')
+    database = new Database();
+    database.getDatabase()
     .then((data) => {       
         renderHeader('header', data.info);
         renderHeroMenu(data.categories);
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         blogInteresting(data);
         bottonRender(data.info);
         cart = new Cart();
+        database.saveSessionStorage(data);
     });
     
 });
