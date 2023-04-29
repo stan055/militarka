@@ -34,14 +34,15 @@ class Cart {
 
     // Add Product
     addProduct(product) {
-        const faShoppingBag = document.querySelectorAll('.fa.fa-shopping-bag');
-        this.data.push({
-            ...product,
-            numberOfUnits: 1
-        });
-
-        this.save();
-        this.render();
+        if (product) {
+            this.data.push({
+                ...product,
+                numberOfUnits: 1
+            });
+    
+            this.save();
+            this.render();
+        }
     }
     
     // Add To Cart

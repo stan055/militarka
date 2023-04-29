@@ -1,4 +1,4 @@
-function featuredProduct(data) {
+function featuredProduct(data, addProduct) {
     // Return if products.lenght too short
     if (data.products.length < 12) {console.log("Data product array too short... Add more products!"); return};
     // Generate eight random value
@@ -45,9 +45,9 @@ function featuredProduct(data) {
                         <img src="${product.imgSrc[0]}"></img>
                     </a>
                     <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a><i class="fa fa-heart"></i></a></li>
+                        <li><a><i class="fa fa-retweet"></i></a></li>
+                        <li><a onclick="addToCart(${product.id})"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="featured__item__text">

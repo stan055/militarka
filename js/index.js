@@ -226,17 +226,6 @@ function setHeroBanner(data) {
     }
 }
 
-// Getting the categoryes
-async function getData(address) {
-    try {
-        let result = await fetch(address)
-        let data = await result.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 function generateRandom(min, max, exclude) {
     let random;
     while (!random) {
@@ -254,3 +243,7 @@ function generateArrayRandomValues (min, max, length) {
     };
     return randoms;
 };
+
+function addToCart(id) {
+    cart.addProduct(database.getProduct(id));
+}

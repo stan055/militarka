@@ -102,7 +102,7 @@ function closePopupCart() {
     overlay.classList.remove('visible');
     body[0].classList.remove('stop-scrolling');
 }
-
+//////////////////////////////////////////////////////////
 // Return product by Id from products database
 function getProductById(id, data = []) {
     try {
@@ -112,7 +112,7 @@ function getProductById(id, data = []) {
         console.log(error);
     }
 }
-
+//////////////////////////////////////////////////////////
 function renderProductDetails() {
     if (!product) return;
 

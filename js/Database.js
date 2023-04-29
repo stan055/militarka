@@ -2,11 +2,11 @@ class Database {
 
     // Get all data from server
     async getDatabase () {
-        let data = this.getSessionStorage();
-        if (data == null) {
-            data = await this.getServerData();
+        this.data = this.getSessionStorage();
+        if (this.data == null) {
+            this.data = await this.getServerData();
         }
-        return data;
+        return this.data;
     }
 
     // Save data to session storage
@@ -36,6 +36,16 @@ class Database {
             console.log(error);
         }   
         return null;
+    }
+
+    // Get product dy id
+    getProduct(id) {
+        try {
+            const product = this.data.products.find(element => element.id == id);
+            return product;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }
