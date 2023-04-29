@@ -6,20 +6,19 @@ const body = document.getElementsByTagName('body');
 const tableBody = document.querySelector('.shoping__cart__table > table > tbody');
 
 document.addEventListener("DOMContentLoaded", () => {
+    const database = new Database();
+    database.getDatabase()
+        .then(data => {
+            renderHeader('header', data.info);
+            renderHeroMenu(data.categories);
 
-    getData('./database.json').then(data => {
-
-        renderHeader(data.info);
-        renderHeroMenu(data.categories);
-
-        const productId = getURLparameter('id');
-        product = getProductById(productId, data.products);
-        renderProductDetails();
-        cart = new Cart();
-    });
+            const productId = getURLparameter('id');
+            product = getProductById(productId, data.products);
+            renderProductDetails();
+            cart = new Cart();
+        });
 
     overlay.addEventListener("click", (e) => closePopupCart()); // Close popup by click overlay
-
 });
 
 
@@ -34,8 +33,8 @@ function remove(index) {
 function qtybtn(action, index) {
     let value = cart.data[index].numberOfUnits;
     if (action === 'minus' && value === 1) return;
-    
-    value = cart.changeQuantityByIndex(action,index);
+
+    value = cart.changeQuantityByIndex(action, index);
     document.getElementById(`cart_input_${index}`).value = value;
     renderSubtotal();
 }
