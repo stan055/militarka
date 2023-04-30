@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const database = new Database();
     database.getDatabase()
         .then(data => {
-            renderHeader('header', data.info);
-            renderHeroMenu(data.categories);
+            headerWidget('header', data.info);
+            heroWidget('hero', data.categories, data.info.tel);
 
             const productId = getURLparameter('id');
             product = getProductById(productId, data.products);

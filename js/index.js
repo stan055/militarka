@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     database = new Database();
     database.getDatabase()
     .then((data) => {       
-        renderHeader('header', data.info);
-        renderHeroMenu(data.categories);
+        headerWidget('header', data.info);
+        heroWidget('hero', data.categories, data.info.tel);
         setHeroBanner(data);
         categorySlider(data); // Render category-slider.js
         featuredProduct(data); // Render featured-product.js

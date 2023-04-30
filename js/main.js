@@ -166,13 +166,6 @@ function getURLparameter(param) {
     return result;
 }
 
-// Get gatabase
-async function getDatabase(address='./database.json') {
-    let result = await fetch(address);
-    let data = await result.json();
-    return data;
-}
-
 // Product details page image gallery slider start
 function productDetailsStartImgSlider() {
     $(".product__details__pic__slider").owlCarousel({
@@ -200,18 +193,5 @@ function productDetailsPicSliderImg() {
     });
 }
 
-// Render hero menu categories 
-function renderHeroMenu(categories) {
-    const heroCategories = document.querySelector(".hero__categories > ul");
 
-    try {
-        Object.entries(categories).forEach((category) => {
-            heroCategories.innerHTML += `
-                <li><a href="./shop-grid.html?category=${category[0]}">${category[1]}</a></li>
-            `;
-        });
-    } catch (error) {
-        console.log(error);
-    }
-}
 
