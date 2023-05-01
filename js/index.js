@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         blogInteresting(data);
         bottonRender(data.info);
         cart = new Cart();
-        database.saveSessionStorage(data);
     });
     
 });

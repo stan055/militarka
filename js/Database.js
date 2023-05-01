@@ -5,12 +5,14 @@ class Database {
         this.data = this.getSessionStorage();
         if (this.data == null) {
             this.data = await this.getServerData();
+            this.saveSessionStorage();
         }
         return this.data;
     }
 
     // Save data to session storage
     saveSessionStorage (data) {
+        console.log('Save session storage data');
         sessionStorage.setItem("data", JSON.stringify(data));
     }
 
