@@ -1,4 +1,4 @@
-function heroWidget(containerId, menuCategories = [], tel = '') {
+function hero(containerId, menuCategories = [], tel = '') {
     const element = document.getElementById(containerId);
     const menu = heroMenu(menuCategories);
 
@@ -47,7 +47,7 @@ function heroWidget(containerId, menuCategories = [], tel = '') {
         `;
     } else {
         console.error(`Hero Widget: container(${containerId}) not finded`);
-        return false;
+        return null;
     }
 
     // Open close hero menu

@@ -1,6 +1,6 @@
 
 // Render header with container id and info email, free-shipping text, logo text
-function headerWidget(id, info) {
+function header(id, info) {
     const header = document.getElementById(id);
     header.innerHTML = `
     <div class="header__top">
