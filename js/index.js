@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hero('hero', data.categories, data.info.tel);
         heroBanner('home_page_slider', data.products);
         categorySlider(data); // Render category-slider.js
-        featuredProduct(data); // Render featured-product.js
+        featuredProduct('featured', data); // Render featured-product.js
         vertivalSlidersStart(data);
         blogInteresting(data);
         bottonRender(data.info);
@@ -128,23 +128,9 @@ function latestProductSlider(data) {
 
 
 
-function generateRandom(min, max, exclude) {
-    let random;
-    while (!random) {
-      const x = Math.floor(Math.random() * (max - min) + 1) + min;
-      if (exclude.indexOf(x) === -1) random = x;
-    }
-    return random;
-};
 
-function generateArrayRandomValues (min, max, length) {
-    let randoms = [];
-    while(randoms.length !== length) {
-        let ran = generateRandom(min, max, randoms);
-        randoms.push(ran);
-    };
-    return randoms;
-};
+
+
 
 function addToCart(id) {
     cart.addProduct(database.getProduct(id));
