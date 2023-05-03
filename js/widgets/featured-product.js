@@ -91,9 +91,9 @@ function featuredProduct(containerId, data) {
                             <img src="${product.imgSrc[0]}"></img>
                         </a>
                         <ul class="featured__item__pic__hover">
-                            <li><a><i class="fa fa-heart"></i></a></li>
-                            <li><a><i class="fa fa-retweet"></i></a></li>
-                            <li><a onclick="addToCart(${product.id})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="cursor:pointer;"><i class="fa fa-heart"></i></a></li>
+                            <li><a style="cursor:pointer;"><i class="fa fa-retweet"></i></a></li>
+                            <li><a style="cursor:pointer;" onclick="addToCart(${product.id})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
