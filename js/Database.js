@@ -5,7 +5,7 @@ class Database {
         this.data = this.getSessionStorage();
         if (this.data == null) {
             this.data = await this.getServerData();
-            this.saveSessionStorage();
+            this.saveSessionStorage(this.data);
         }
         return this.data;
     }
@@ -20,8 +20,10 @@ class Database {
         console.log('get Session Storage data')
         try {
             let json = sessionStorage.getItem("data");
-            let data = JSON.parse(json);
-            return data;
+            if (json != undefined) {
+                let data = JSON.parse(json);
+                return data;
+            }
         } catch (error) {
             console.log(error);
         }
