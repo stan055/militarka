@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         blogInteresting(data);
         bottonRender(data.info);
         cart = new Cart();
+        const popupCart = new PopupCart('body');
     });
     
 });
