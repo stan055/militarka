@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     database = new Database();
     database.getDatabase()
     .then((data) => {       
-        header('header', data.info);
-        hero('hero', data.categories, data.info.tel);
-        heroBanner('home_page_slider', data.products);
-        categorySlider(data); // Render category-slider.js
+        header('header', data.info); //  Render logo, pages-menu, cart...
+        hero('hero', data.categories, data.info.tel); // Render menu, search, tel
+        heroBanner('home_page_slider', data.products); // Render Main Big Banner
+        categorySlider('categories', data); // Render category-slider.js
         featuredProduct('featured', data); // Render featured-product.js
         vertivalSlidersStart(data);
         blogInteresting(data);
