@@ -43,6 +43,7 @@ class PopupCart {
     }
 
     renderCart(container) {
+        container.innerHTML = ``;
         container.innerHTML += `
         <div class="row m-0 p-3 sticky-top head-popup-cart">
         <div class="col">
@@ -93,9 +94,10 @@ class PopupCart {
         `;
     }
 
-    renderTable(container, products) {
+    renderTable(table, products) {
+        table.innerHTML = ``;
         products.forEach((product,index) => {
-            container.innerHTML += `
+            table.innerHTML += `
                 <tr>
                     <td class="shoping__cart__item">
                         <img src="${product.imgSrc[0]}" style="height: 6em;" alt="">
@@ -133,6 +135,13 @@ class PopupCart {
                 product.numberOfUnits += 1;
                 document.getElementById(`cart_input_${index}`).value = product.numberOfUnits;
             });
+            document.getElementById(`cart_remove_${index}`).addEventListener('click', event => {
+                products.splice(index,1);
+                this.render(products);
+            });
         });
+        
     }
+
+
 };
