@@ -1,4 +1,4 @@
-let cart, database;
+let cart, database, popupCart;
 document.addEventListener("DOMContentLoaded", () => {
     database = new Database();
     database.getDatabase()
@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         vertivalSlidersStart(data);
         blogInteresting(data);
         bottonRender(data.info);
+        
         cart = new Cart();
-        const popupCart = new PopupCart('body');
+        popupCart = new PopupCart('popup_cart');
     });
     
 });
@@ -127,12 +128,8 @@ function latestProductSlider(data) {
     latestProductOriginSlider.innerHTML = verticalSliderRenderHtml(reversed);
 }
 
-
-
-
-
-
-
 function addToCart(id) {
-    cart.addProduct(database.getProduct(id));
+    // cart.addProduct(database.getProduct(id));
+    popupCart.render(cart.data);
+    popupCart.show('body', 'overlay');
 }

@@ -1,14 +1,19 @@
 class PopupCart {
+
     constructor(containerId) {
         this.containerId = containerId;
         this.container = document.getElementById(containerId);
         this.validation(this.container, containerId);
     }
-    render(data) {
-        let table = this.renderTable(data);
-        this.container.innerHTML += this.renderCart(table);
+
+    render(products) {
+        this.renderCart(this.container);
+        const table = document.getElementById('popup_cart_tbody');
+        this.renderTable(table, products);
+        this.addListeners(products);
     }
-    show(overlayId, bodyId) {
+
+    show(bodyId, overlayId) {
         try {
             this.container.classList.add('popup-open');
             document.getElementById(overlayId).classList.add('visible');
@@ -17,9 +22,18 @@ class PopupCart {
             console.error(error);
         }
     }
-    hide() {
+
+    hide(bodyId, overlayId) {
+        try {
+            this.container.classList.remove('popup-open');
+            document.getElementById(overlayId).classList.remove('visible');
+            document.getElementById(bodyId).classList.remove('stop-scrolling');            
+        } catch (error) {
+            console.error(error);
+        }
 
     }
+
     validation(element, elementId) {
         if (element == undefined | element == null) {
             console.error(`PopupCart: Error element, elementId: ${elementId}`);
@@ -27,8 +41,9 @@ class PopupCart {
         }
         return true;
     }
-    renderCart(table) {
-        return `
+
+    renderCart(container) {
+        container.innerHTML += `
         <div class="row m-0 p-3 sticky-top head-popup-cart">
         <div class="col">
             <h3>Кошик</h3>
@@ -45,8 +60,8 @@ class PopupCart {
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
                     <table>
-                        <tbody>
-                        ${table}
+                        <tbody id="popup_cart_tbody">
+                        
                         </tbody>
                     </table>
                 </div>
@@ -65,7 +80,7 @@ class PopupCart {
             <div class="col-lg-7">
                 <div class="shoping__checkout">
                     <ul>
-                        <li>Сумма <span id="subtotal">${cart.sum}₴</span></li>
+                        <li>Сумма <span id="subtotal">${'cart.sum'}₴</span></li>
                     </ul>
                     <button type="button" onclick="closePopup()" class="primary-btn w-100">
                         Оформити замовлення
@@ -77,10 +92,10 @@ class PopupCart {
         </div>
         `;
     }
-    renderTable(data) {
-        let table = ``;
-        data.forEach(product => {
-            table += `
+
+    renderTable(container, products) {
+        products.forEach((product,index) => {
+            container.innerHTML += `
                 <tr>
                     <td class="shoping__cart__item">
                         <img src="${product.imgSrc[0]}" style="height: 6em;" alt="">
@@ -91,9 +106,9 @@ class PopupCart {
                     <td class="shoping__cart__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <span class="qtybtn" id="qtybtn_minus_${product.id}">-</span>
-                                <input type="text" id="cart_input_${product.id}" value="${product.numberOfUnits}">
-                                <span class="qtybtn" id="qtybtn_plus_${product.id}">+</span>
+                                <span class="qtybtn" id="qtybtn_minus_${index}">-</span>
+                                <input type="text" id="cart_input_${index}" value="${product.numberOfUnits}">
+                                <span class="qtybtn" id="qtybtn_plus_${index}">+</span>
                             </div>
                         </div>
                     </td>
@@ -101,15 +116,23 @@ class PopupCart {
                     ${product.price}
                     </td>
                     <td class="shoping__cart__item__close">
-                        <span class="icon_close" id="cart_remove_${product.id}"></span>
+                        <span class="icon_close" id="cart_remove_${index}"></span>
                     </td>
                 </tr>
             `;
-            document.getElementById(`qtybtn_minus_${product.id}`).addEventListener('click', event => {
-                console.log(event.target);
-            });
-            
         });
-        return table;
     };
+
+    addListeners(products) {
+        products.forEach((product,index) => {
+            document.getElementById(`qtybtn_minus_${index}`).addEventListener('click', event => {
+                product.numberOfUnits = product.numberOfUnits > 0 ? product.numberOfUnits-1 : 0;
+                document.getElementById(`cart_input_${index}`).value = product.numberOfUnits;
+            });
+            document.getElementById(`qtybtn_plus_${index}`).addEventListener('click', event => {
+                product.numberOfUnits += 1;
+                document.getElementById(`cart_input_${index}`).value = product.numberOfUnits;
+            });
+        });
+    }
 };

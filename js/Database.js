@@ -1,7 +1,10 @@
 class Database {
 
     // Get all data from server
-    async getDatabase () {
+    async getDatabase() {
+        console.log(this.data)
+        if (this.data) return this.data;
+
         this.data = this.getSessionStorage();
         if (this.data == null) {
             this.data = await this.getServerData();
@@ -11,12 +14,12 @@ class Database {
     }
 
     // Save data to session storage
-    saveSessionStorage (data) {
+    saveSessionStorage(data) {
         console.log('Save session storage data');
         sessionStorage.setItem("data", JSON.stringify(data));
     }
 
-    getSessionStorage () {
+    getSessionStorage() {
         console.log('get Session Storage data')
         try {
             let json = sessionStorage.getItem("data");
@@ -30,7 +33,7 @@ class Database {
         return null;
     }
 
-    async getServerData () {
+    async getServerData() {
         console.log('get Server data')
         try {
             let result = await fetch('./database.json');
@@ -38,7 +41,7 @@ class Database {
             return data;
         } catch (error) {
             console.log(error);
-        }   
+        }
         return null;
     }
 

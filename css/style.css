@@ -3574,7 +3574,7 @@ ol {
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	opacity: .0;
+	opacity: .1;
 	display: none;
 }
 
@@ -3602,7 +3602,7 @@ ol {
 .popup-cart > div {
 	background: white;
 	border: 1px solid lightgray;
-	border-radius: .4rem;
+	border-radius: .4rem .4rem 0 0;
 
 }
 
