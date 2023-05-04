@@ -1837,6 +1837,8 @@ ol {
 	color: #6f6f6f;
 	cursor: pointer;
 	display: inline-block;
+	border: none;
+	background-color: transparent;
 }
 
 .product__details__tab {

@@ -1,33 +1,37 @@
 class PopupCart {
+    bodyId = 'body';
+    overlayId = 'overlay';
 
-    constructor(containerId) {
+    constructor(containerId, cart) {
+        if (cart == undefined | cart == null) console.error(`PopupCart Error: cart=${cart}`);
+        this.cart = cart;
         this.containerId = containerId;
         this.container = document.getElementById(containerId);
         this.validation(this.container, containerId);
     }
 
-    render(products) {
+    render() {
         this.renderCart(this.container);
         const table = document.getElementById('popup_cart_tbody');
-        this.renderTable(table, products);
-        this.addListeners(products);
+        this.renderTable(table, this.cart.products);
+        this.addListeners(this.cart.products);
     }
 
-    show(bodyId, overlayId) {
+    show() {
         try {
             this.container.classList.add('popup-open');
-            document.getElementById(overlayId).classList.add('visible');
-            document.getElementById(bodyId).classList.add('stop-scrolling');    
+            document.getElementById(this.overlayId).classList.add('visible');
+            document.getElementById(this.bodyId).classList.add('stop-scrolling');    
         } catch (error) {
             console.error(error);
         }
     }
 
-    hide(bodyId, overlayId) {
+    hide() {
         try {
             this.container.classList.remove('popup-open');
-            document.getElementById(overlayId).classList.remove('visible');
-            document.getElementById(bodyId).classList.remove('stop-scrolling');            
+            document.getElementById(this.overlayId).classList.remove('visible');
+            document.getElementById(this.bodyId).classList.remove('stop-scrolling');            
         } catch (error) {
             console.error(error);
         }
@@ -50,7 +54,7 @@ class PopupCart {
             <h3>Кошик</h3>
         </div>
         <div class="col">
-            <button type="button" class="close fa-2x" onclick="closePopupCart()" aria-label="Close">
+            <button type="button" class="close fa-2x" id="cart_btn_close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -94,9 +98,9 @@ class PopupCart {
         `;
     }
 
-    renderTable(table, products) {
+    renderTable(table) {
         table.innerHTML = ``;
-        products.forEach((product,index) => {
+        this.cart.products.forEach((product,index) => {
             table.innerHTML += `
                 <tr>
                     <td class="shoping__cart__item">
@@ -108,9 +112,9 @@ class PopupCart {
                     <td class="shoping__cart__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <span class="qtybtn" id="qtybtn_minus_${index}">-</span>
+                                <button class="qtybtn" id="qtybtn_minus_${index}">-</button>
                                 <input type="text" id="cart_input_${index}" value="${product.numberOfUnits}">
-                                <span class="qtybtn" id="qtybtn_plus_${index}">+</span>
+                                <button class="qtybtn" id="qtybtn_plus_${index}">+</button>
                             </div>
                         </div>
                     </td>
@@ -125,8 +129,8 @@ class PopupCart {
         });
     };
 
-    addListeners(products) {
-        products.forEach((product,index) => {
+    addListeners() {
+        this.cart.products.forEach((product,index) => {
             document.getElementById(`qtybtn_minus_${index}`).addEventListener('click', event => {
                 product.numberOfUnits = product.numberOfUnits > 0 ? product.numberOfUnits-1 : 0;
                 document.getElementById(`cart_input_${index}`).value = product.numberOfUnits;
@@ -136,12 +140,14 @@ class PopupCart {
                 document.getElementById(`cart_input_${index}`).value = product.numberOfUnits;
             });
             document.getElementById(`cart_remove_${index}`).addEventListener('click', event => {
-                products.splice(index,1);
-                this.render(products);
-            });
+                this.cart.remove(product.id);
+                this.render();
+            }); 
         });
-        
-    }
+        document.getElementById(`cart_btn_close`).addEventListener('click', event => {
+            this.hide();
+        });  
+    };
 
 
 };

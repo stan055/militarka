@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bottonRender(data.info);
         
         cart = new Cart();
-        popupCart = new PopupCart('popup_cart');
+        popupCart = new PopupCart('popup_cart', cart);
     });
     
 });
@@ -130,6 +130,6 @@ function latestProductSlider(data) {
 
 function addToCart(id) {
     // cart.addProduct(database.getProduct(id));
-    popupCart.render(cart.data);
-    popupCart.show('body', 'overlay');
+    popupCart.render();
+    popupCart.show();
 }
