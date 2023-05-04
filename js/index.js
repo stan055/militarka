@@ -129,7 +129,7 @@ function latestProductSlider(data) {
 }
 
 function addToCart(id) {
-    // cart.addProduct(database.getProduct(id));
+    cart.addProduct(database.getProduct(id));
     popupCart.render();
     popupCart.show();
 }

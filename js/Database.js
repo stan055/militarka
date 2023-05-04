@@ -2,7 +2,7 @@ class Database {
 
     // Get all data from server
     async getDatabase() {
-        console.log(this.data)
+        // return database
         if (this.data) return this.data;
 
         this.data = this.getSessionStorage();

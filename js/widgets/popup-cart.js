@@ -38,14 +38,6 @@ class PopupCart {
 
     }
 
-    validation(element, elementId) {
-        if (element == undefined | element == null) {
-            console.error(`PopupCart: Error element, elementId: ${elementId}`);
-            return false;
-        }
-        return true;
-    }
-
     renderCart(container) {
         container.innerHTML = ``;
         container.innerHTML += `
@@ -76,7 +68,7 @@ class PopupCart {
             <div class="col-lg-5 align-self-end">
                 <div class="shoping__continue">
                     <div class="shoping__discount">
-                        <button type="button" class="primary-btn cart-btn w-100" onclick="closePopupCart()">
+                        <button type="button" class="primary-btn cart-btn w-100" id="cart_btn_continue">
                             ПРОДОВЖИТИ ПОКУПКИ
                         </button>
                     </div>
@@ -85,11 +77,13 @@ class PopupCart {
             <div class="col-lg-7">
                 <div class="shoping__checkout">
                     <ul>
-                        <li>Сумма <span id="subtotal">${'cart.sum'}₴</span></li>
+                        <li>Сумма <span id="subtotal">${this.cart.sum}₴</span></li>
                     </ul>
-                    <button type="button" onclick="closePopup()" class="primary-btn w-100">
+                    <a href="./checkout.html">
+                    <button type="button" class="primary-btn w-100">
                         Оформити замовлення
                     </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -145,9 +139,21 @@ class PopupCart {
             }); 
         });
         document.getElementById(`cart_btn_close`).addEventListener('click', event => {
+            this.cart.save();
             this.hide();
-        });  
+        });
+        document.getElementById(`cart_btn_continue`).addEventListener('click', event => {
+            this.cart.save();
+            this.hide();
+        });
+        
     };
 
-
+    validation(element, elementId) {
+        if (element == undefined | element == null) {
+            console.error(`PopupCart: Error element, elementId: ${elementId}`);
+            return false;
+        }
+        return true;
+    }
 };
