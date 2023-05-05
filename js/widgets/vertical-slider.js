@@ -34,14 +34,15 @@ function verticalSlider(containerId, products = [], hText = 'Text') {
                 html += `<div class="latest-prdouct__slider__item">`;
                 for (y=0; y<3; y++) {
                     const index = i + y;
+                    let product = products[index];
                     html += `
-                    <a href="#" class="latest-product__item">
+                    <a href="./product.html?id=${product.id}" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                        <img src="${products[index].imgSrc[0]}" alt="">
+                        <img src="${product.imgSrc[0]}" alt="">
                     </div>
                     <div class="latest-product__item__text">
-                        <h6>${products[index].name}</h6>
-                        <span>${products[index].price}₴</span>
+                        <h6>${product.name}</h6>
+                        <span>${product.price}₴</span>
                     </div>
                     </a>
                     `;
