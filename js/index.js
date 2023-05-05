@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroBanner('home_page_slider', data.products); // Render Main Big Banner
         categorySlider('categories', data); // Render category-slider.js
         featuredProduct('featured', data); // Render featured-product.js
-        vertivalSlidersStart(data);
+        vertivalSlider(data);
         blogInteresting(data);
         bottonRender(data.info);
         
@@ -57,75 +57,26 @@ function blogInteresting(data) {
 
 }
 
-function vertivalSlidersStart(data) {
+function vertivalSlider(data) {
     const sliderLenght = 6;
 
     if (data.products.length > sliderLenght+1) {
-        oldProductsSlider(data);
-        latestProductSlider(data);
-        topPriceProductsSlider(data);
-        owlCaruselStart();                
+        // Old products
+        verticalSlider('vertical_slider', data.products, 'Рейтингові')
+        
+        // New products
+        const newProd = data.products.reverse();
+        verticalSlider('vertical_slider', newProd, 'Нове')
+
+        // Expensive products
+        const sortedByPrice = data.products.sort((a, b) => a.price - b.price);
+        const expensiveProd = sortedByPrice.reverse();
+        verticalSlider('vertical_slider', expensiveProd, 'У Топі')
+
+        verticalSliderStart()              
     } else {
         console.log(`Error...Products length is too short...Product length=${data.products.length}`);
     }
-}
-
-function oldProductsSlider(data) {
-    const oldProductSlider = document.querySelector('.old-product__slider');
-    oldProductSlider.innerHTML = verticalSliderRenderHtml(data.products);
-}
-
-function owlCaruselStart() {
-    $(".latest-product__slider").owlCarousel({
-        loop: true,
-        margin: 0,
-        items: 1,
-        dots: false,
-        nav: true,
-        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-        smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true
-    });
-}
-
-function verticalSliderRenderHtml(array) {
-    let html = ``;
-    for (i=0; i<=3; i+=3) {
-        html += `<div class="latest-prdouct__slider__item">`;
-        for (y=0; y<3; y++) {
-            const index = i + y;
-            html += `
-            <a href="#" class="latest-product__item">
-            <div class="latest-product__item__pic">
-                <img src="${array[index].imgSrc[0]}" alt="">
-            </div>
-            <div class="latest-product__item__text">
-                <h6>${array[index].name}</h6>
-                <span>${array[index].price}₴</span>
-            </div>
-            </a>
-            `;
-        };
-        html += `</div>`;
-    }
-    return html;
-}
-
-// Top Price Product Slider
-function topPriceProductsSlider(data) {
-    const topPriceProductSlider = document.querySelector('.top-rated-product__slider');
-    const sortedByPrice = data.products.sort((a, b) => a.price - b.price);
-    const reversed = sortedByPrice.reverse();
-    topPriceProductSlider.innerHTML = verticalSliderRenderHtml(reversed);
-
-}
-
-// Latest Product Slider
-function latestProductSlider(data) {
-    const latestProductOriginSlider = document.querySelector('.latest-product-origin__slider');
-    const reversed = data.products.reverse();
-    latestProductOriginSlider.innerHTML = verticalSliderRenderHtml(reversed);
 }
 
 function addToCart(id) {
