@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         categorySlider('categories', data); // Render category-slider.js
         featuredProduct('featured', data); // Render featured-product.js
         vertivalSlider(data);
-        blogInteresting(data);
+        interestingBlock('interesting_block', data.products);
         bottonRender(data.info);
         
         cart = new Cart();
@@ -32,47 +32,19 @@ function bottonRender(info) {
     `;
 }
 
-function blogInteresting(data) {
-    const quantity = 3;
-    const blogInteresting = document.querySelector('.blog-interesting');
-    for (i=0; i<quantity; i++) {
-        blogInteresting.innerHTML += `
-        <div class="col-lg-4 col-md-4 col-sm-6">
-        <div class="blog__item">
-            <div class="blog__item__pic">
-                <img src="${data.products[i].imgSrc}" alt="">
-            </div>
-            <div class="blog__item__text">
-                <ul>
-                    <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                    <li><i class="fa fa-comment-o"></i> 5</li>
-                </ul>
-                <h5><a href="#">${data.products[i].name}</a></h5>
-                <p>${data.products[i].description.slice(0,250)}...</p>
-            </div>
-        </div>
-        </div>
-        `;
-    }
-
-}
-
 function vertivalSlider(data) {
     const sliderLenght = 6;
 
     if (data.products.length > sliderLenght+1) {
         // Old products
         verticalSlider('vertical_slider', data.products, 'Рейтингові')
-        
         // New products
         const newProd = data.products.reverse();
         verticalSlider('vertical_slider', newProd, 'Нове')
-
         // Expensive products
-        const sortedByPrice = data.products.sort((a, b) => a.price - b.price);
-        const expensiveProd = sortedByPrice.reverse();
-        verticalSlider('vertical_slider', expensiveProd, 'У Топі')
-
+        const sortedByPrice = data.products.sort((a, b) => b.price - a.price);
+        verticalSlider('vertical_slider', sortedByPrice, 'У Топі')
+        // Start slider carusel
         verticalSliderStart()              
     } else {
         console.log(`Error...Products length is too short...Product length=${data.products.length}`);
