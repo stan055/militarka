@@ -10,27 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
         featuredProduct('featured', data); // Render featured-product.js
         vertivalSlider(data);
         interestingBlock('interesting_block', data.products);
-        bottonRender(data.info);
+        footer('footer', data.info)
         
         cart = new Cart();
         popupCart = new PopupCart('popup_cart', cart);
     });
     
 });
-
-function bottonRender(info) {
-    const footerAbout = document.querySelector('.footer__about');
-    footerAbout.innerHTML = `
-        <div class="footer__about__logo">
-        <a href="./index.html"><span>${info.header_logo}</span></a>
-        </div>
-        <ul>
-            <li>Адреса: ${info.address}</li>
-            <li>Тел: ${info.tel}</li>
-            <li>Email: ${info.email}</li>
-        </ul>   
-    `;
-}
 
 function vertivalSlider(data) {
     const sliderLenght = 6;
