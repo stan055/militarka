@@ -2,8 +2,10 @@ let cart, database, popupCart;
 document.addEventListener("DOMContentLoaded", () => {
     database = new Database();
     database.getDatabase()
-    .then((data) => {       
+    .then((data) => {
+        const perform1 = performance.now();
         header('header', data.info); //  Render logo, pages-menu, cart...
+        humbergerMenu('humberger_menu', data.info) // Hamberger menu rendering and start
         hero('hero', data.categories, data.info.tel); // Render menu, search, tel
         heroBanner('home_page_slider', data.products); // Render Main Big Banner
         categorySlider('categories', data); // Render category-slider.js
@@ -14,8 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
         cart = new Cart();
         popupCart = new PopupCart('popup_cart', cart);
+
+        console.log(`Performance: ${performance.now() - perform1}`)    
     });
-    
 });
 
 function vertivalSlider(data) {
@@ -42,3 +45,4 @@ function addToCart(id) {
     popupCart.render();
     popupCart.show();
 }
+

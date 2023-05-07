@@ -3078,6 +3078,9 @@ ol {
 		margin-bottom: 30px;
 	}
 	.humberger__menu__logo a {
+		font-size: 36px;
+		font-weight: bold;
+		color: black;
 		display: inline-block;
 	}
 	.humberger__menu__contact {
@@ -3340,6 +3343,9 @@ ol {
 		margin-bottom: 30px;
 	}
 	.humberger__menu__logo a {
+		font-size: 36px;
+		color: black;
+		font-weight: bold;
 		display: inline-block;
 	}
 	.humberger__menu__contact {
