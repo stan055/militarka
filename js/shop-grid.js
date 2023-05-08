@@ -1,17 +1,22 @@
 
-let productsData = [];
-let cart;
+let cart, database, popupCart;
 document.addEventListener("DOMContentLoaded", () => {
 
     const category = getURLparameter('category');
-    getProducts(category)
-    .then(products => {
-        productsData = products;
-        displayProducts(products);
-    }).then(() => {
-        cart = new Cart();
-    })
+    database = new Database();
 
+    database.getDatabase()
+    .then(data => {
+        const perform1 = performance.now();
+
+        humbergerMenu('humberger_menu', data.info.header_logo)
+        header('header', data.info, '', 'active'); //  Render logo, pages-menu, cart...
+        hero('hero', data.categories, data.info.tel); // Render menu, search, tel
+        footer('footer', data.info)
+
+        cart = new Cart();
+        console.log(`Performance: ${performance.now() - perform1}`)    
+    })
 })
 
 // Getting the products

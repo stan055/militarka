@@ -46,8 +46,8 @@ function humbergerMenu (containerId, info) {
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
+                <img src="img/ukr_flag.png" alt="">
+                <div>Українська</div>
                 <span class="arrow_carrot-down"></span>
             </div>
             <div class="header__top__right__auth">

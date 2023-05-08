@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     database.getDatabase()
     .then((data) => {
         const perform1 = performance.now();
-        header('header', data.info); //  Render logo, pages-menu, cart...
+        document.getElementById('title').textContent = data.info.header_logo
+        header('header', data.info, 'active'); //  Render logo, pages-menu, cart...
         humbergerMenu('humberger_menu', data.info) // Hamberger menu rendering and start
         hero('hero', data.categories, data.info.tel); // Render menu, search, tel
         heroBanner('home_page_slider', data.products); // Render Main Big Banner

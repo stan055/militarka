@@ -1,6 +1,7 @@
 
 // Render header with container id and info email, free-shipping text, logo text
-function header(id, info) {
+// li* = active - Activated menu item 
+function header(id, info, li1='',li2='',li3='',li4='') {
     const header = document.getElementById(id);
     header.innerHTML = `
     <div class="header__top">
@@ -23,7 +24,7 @@ function header(id, info) {
                         <a href="#"><i class="fa fa-pinterest-p"></i></a>
                     </div>
                     <div class="header__top__right__language">
-                        <img src="img/Flag_of_Ukraine_mini.png" alt="">
+                        <img src="img/ukr_flag.png" alt="">
                         <div>Українська</div>
                         <span class="arrow_carrot-down"></span>
                     </div>
@@ -45,9 +46,9 @@ function header(id, info) {
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Головна</a></li>
-                        <li><a href="./shop-grid.html">Магазин</a></li>
-                        <li><a href="#">Сторінки</a>
+                        <li class="${li1}"><a href="./index.html">Головна</a></li>
+                        <li class="${li2}"><a href="./shop-grid.html">Магазин</a></li>
+                        <li class="${li3}"><a href="#">Сторінки</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./product.html">product.html</a></li>
                                 <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -55,7 +56,7 @@ function header(id, info) {
                                 <li><a href="./blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="./contact.html">Контакти</a></li>
+                        <li class="${li4}"><a href="./contact.html">Контакти</a></li>
                     </ul>
                 </nav>
             </div>
