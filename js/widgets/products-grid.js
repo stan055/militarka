@@ -1,15 +1,14 @@
-{/* <script src="js/pagination.min.js"></script> */}
-
-function displayProducts(cotainerId, products) {
-    
+/*html include <script src="js/pagination.min.js"></script> */ 
+function productsGrid(paginationContainer, dataContainer, products) {    
     // Products Grid with Pagination
-    $('#pagination-container').pagination({
-        dataSource: productsData,
+    $(`#${paginationContainer}`).pagination({
+        dataSource: products,
         pageSize: 12,
         callback: function (data, pagination) {
             // template method of yourself
             var html = simpleTemplating(data);
-            $('#data-container').html(html);
+            $(`#${dataContainer}`).html(html);
+            $(`#header`)[0].scrollIntoView({ block: "start"});
         }
     });
 
@@ -27,7 +26,7 @@ function displayProducts(cotainerId, products) {
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">${product.name}</a></h6>
+                            <h6><a href="./product.html?id=${product.id}">${product.name}</a></h6>
                             <h5>$${product.price}</h5>
                         </div>
                     </div>
