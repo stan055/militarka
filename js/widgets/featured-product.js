@@ -50,6 +50,7 @@ function featuredProduct(containerId, data) {
         }
         return ran;
     };
+
     function getRandomProduct(products) {
         const ranProducts = [];
         const length = 8; // Length of random array
@@ -63,6 +64,7 @@ function featuredProduct(containerId, data) {
         };
         return ranProducts;
     };
+
     function getCategory(products) {
         const categories = [];
         products.forEach(product => {
@@ -70,6 +72,7 @@ function featuredProduct(containerId, data) {
         });
         return categories;
     };
+
     function controlsHtml(categories, dataCategories) {
         let html = ``;
         let controlMax = categories.length > 4 ? 4 : categories.length;
@@ -85,7 +88,7 @@ function featuredProduct(containerId, data) {
             html += `
             <div class="col-lg-3 col-md-4 col-sm-6 mix ${product.category}">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" 
+                    <div class="featured__item__pic" 
                     style="display:flex;align-items:center;height:260px;">
                         <a href="${href}">
                             <img src="${product.imgSrc[0]}"></img>

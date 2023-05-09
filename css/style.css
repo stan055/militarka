@@ -603,11 +603,11 @@ ol {
 -----------------------*/
 
 .hero {
-	padding-bottom: 50px;
+	padding-bottom: 25px;
 }
 
 .hero.hero-normal {
-	padding-bottom: 30px;
+	padding-bottom: 25px;
 }
 
 .hero.hero-normal .hero__categories {
@@ -1083,7 +1083,7 @@ ol {
 .breadcrumb-section {
 	display: flex;
 	align-items: center;
-	padding: 45px 0 40px;
+	padding: 0 0 0;
 }
 
 .breadcrumb__text h2 {
@@ -1296,12 +1296,13 @@ ol {
 -----------------------*/
 
 .product {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-top: 15px;
+	padding-bottom: 35px;
 }
 
 .product__discount {
-	padding-bottom: 50px;
+	padding-top: 60px;
+	padding-bottom: 60px;
 }
 
 .product__discount__title {
@@ -1463,8 +1464,7 @@ ol {
 }
 
 .filter__item {
-	padding-top: 45px;
-	border-top: 1px solid #ebebeb;
+
 	padding-bottom: 20px;
 }
 

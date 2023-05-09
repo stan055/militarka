@@ -18,7 +18,11 @@ function productsGrid(paginationContainer, dataContainer, products) {
             html += `
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" style="background-image: url('${product.imgSrc[0]}');">
+                        <div class="product__item__pic"
+                        style="display:flex;align-items:center;">
+                            <a href="./product.html?id=${product.id}">
+                            <img src="${product.imgSrc[0]}"></img>
+                            </a>
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
