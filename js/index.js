@@ -27,13 +27,13 @@ function vertivalSlider(data) {
 
     if (data.products.length > sliderLenght+1) {
         // Old products
-        verticalSlider('vertical_slider', data.products, 'Рейтингові')
+        verticalSlider('slider_old_products', data.products, 'Рейтингові')
         // New products
         const newProd = data.products.reverse();
-        verticalSlider('vertical_slider', newProd, 'Нове')
+        verticalSlider('slider_new_products', newProd, 'Нове')
         // Expensive products
         const sortedByPrice = data.products.sort((a, b) => b.price - a.price);
-        verticalSlider('vertical_slider', sortedByPrice, 'У Топі')
+        verticalSlider('slider_top_products', sortedByPrice, 'У Топі')
         // Start slider carusel
         verticalSliderStart()              
     } else {

@@ -17,13 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const category = getURLparameter('category');
         if (category != null) {
             const products = data.products.filter(product => product.category == category)
-            productsGrid('pagination_container', 'data_container', products)
+            productsGrid('pagination_container', 'data_container', products, 'product_sort')
             productSort('product_sort', products)
         } else {
-            productsGrid('pagination_container', 'data_container', data.products)
+            productsGrid('pagination_container', 'data_container', data.products, 'product_sort')
             productSort('product_sort', data.products)
         }
         
+        verticalSlider('slider_new_products', data.products.reverse(), 'Нове')
+        verticalSliderStart()
+
         cart = new Cart();
         console.log(`Performance: ${performance.now() - perform1}`)    
     })
@@ -34,4 +37,3 @@ document.addEventListener("DOMContentLoaded", () => {
 function addToCart(id) {
     cart.addToCart(id, productsData);
 }
-

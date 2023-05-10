@@ -17,13 +17,11 @@ function verticalSlider(containerId, products = [], hText = 'Text') {
 
     const itemsHtml = renderItems();
     container.innerHTML += `
-    <div class="col-lg-4 col-md-6">
     <div class="latest-product__text">
         <h4>${hText}</h4>
         <div class="latest-product__slider owl-carousel">
         ${itemsHtml}
         </div>
-    </div>
     </div>
     `;
 
