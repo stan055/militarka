@@ -17,14 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const category = getURLparameter('category');
         if (category != null) {
             const products = data.products.filter(product => product.category == category)
-            productsGrid('pagination_container', 'data_container', products, 'product_sort')
+            productsGrid('pagination_container', 'data_container', products)
             productSort('product_sort', products)
+            priceRange('price_range', products)
+
         } else {
-            productsGrid('pagination_container', 'data_container', data.products, 'product_sort')
+            productsGrid('pagination_container', 'data_container', data.products)
             productSort('product_sort', data.products)
+            priceRange('price_range', data.products)
         }
         
-        verticalSlider('slider_new_products', data.products.reverse(), 'Нове')
+        const sixLastProd = data.products.slice(data.products.length-7,data.products.length-1)
+        verticalSlider('slider_new_products', sixLastProd, 'Нове')
         verticalSliderStart()
 
         cart = new Cart();

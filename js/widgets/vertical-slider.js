@@ -10,7 +10,7 @@ function verticalSlider(containerId, products = [], hText = 'Text') {
         return;
     };
 
-    if (products.length < 7) {
+    if (products.length < 6) {
         console.error(`Vertical Slider: products.length = ${products.length}`);
         return;
     };

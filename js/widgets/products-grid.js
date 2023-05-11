@@ -1,5 +1,5 @@
 /*html include <script src="js/pagination.min.js"></script> */ 
-function productsGrid(paginationContainer, dataContainer, products, scrollElementId) {    
+function productsGrid(paginationContainer, dataContainer, products, scrollElementId='product_sort') {    
     // Products Grid with Pagination
     $(`#${paginationContainer}`).pagination({
         dataSource: products,
@@ -8,7 +8,7 @@ function productsGrid(paginationContainer, dataContainer, products, scrollElemen
             // template method of yourself
             var html = simpleTemplating(data);
             $(`#${dataContainer}`).html(html);
-            $(`#${scrollElementId}`)[0].scrollIntoView({ block: "start"});
+            if (scrollElementId) $(`#${scrollElementId}`)[0].scrollIntoView({ block: "start"});
         }
     });
 

@@ -28,6 +28,7 @@ function productSort(containerId, products) {
     `
     const selectorSort = document.getElementById('selector_sort')
     selectorSort.addEventListener("change", event => {
+        console.log('SORT')
         if (event.target.value == 'old') {
             products = products.sort((a,b)=> a.id - b.id)
         }
