@@ -41,7 +41,10 @@ function productSort(containerId, products) {
         if (event.target.value == 'expensive') {
             products = products.sort((a,b)=> b.price - a.price)
         }
+        const yPos = window.pageYOffset
+        const xPos = window.pageXOffset
         productsGrid('pagination_container', 'data_container', products)
+        window.scrollTo(xPos, yPos)
     });
 }
 

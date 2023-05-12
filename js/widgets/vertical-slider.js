@@ -19,11 +19,23 @@ function verticalSlider(containerId, products = [], hText = 'Text') {
     container.innerHTML += `
     <div class="latest-product__text">
         <h4>${hText}</h4>
-        <div class="latest-product__slider owl-carousel">
+        <div class="latest-product__slider owl-carousel" id="latest_product_slider">
         ${itemsHtml}
         </div>
     </div>
     `;
+
+    $('#latest_product_slider').owlCarousel({
+        loop: true,
+        margin: 0,
+        items: 1,
+        dots: false,
+        nav: true,
+        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true
+    });
 
     function renderItems() {
         let html = ``;
@@ -54,16 +66,3 @@ function verticalSlider(containerId, products = [], hText = 'Text') {
     }
 }
 
-function verticalSliderStart(className = 'latest-product__slider') {
-    $(`.${className}`).owlCarousel({
-        loop: true,
-        margin: 0,
-        items: 1,
-        dots: false,
-        nav: true,
-        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-        smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true
-    });
-}
