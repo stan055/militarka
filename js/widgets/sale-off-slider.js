@@ -28,12 +28,13 @@ function saleOffSlider(containerId, products) {
 
     function body() {
         let html = ``
-        products.forEach(element => {
+        products.forEach(product => {
+            const pp = Math.round(product.price/100*20 + product.price)
             html += `
             <div class="col-lg-4">
             <div class="product__discount__item">
-                <div class="product__discount__item__pic"
-                    style="background-image: url('${element.imgSrc}');">
+                <div class="product__discount__item__pic set-bg"
+                    style="background-image: url('${product.imgSrc[0]}');">
                     <div class="product__discount__percent">-20%</div>
                     <ul class="product__item__pic__hover">
                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -42,9 +43,9 @@ function saleOffSlider(containerId, products) {
                     </ul>
                 </div>
                 <div class="product__discount__item__text">
-                    <span>Dried Fruit</span>
-                    <h5><a href="#">Raisin’n’nuts</a></h5>
-                    <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                    <span>******</span>
+                    <h5><a href="./product.html?id=${product.id}">${product.name}</a></h5>
+                    <div class="product__item__price">${product.price}₴<span>${pp}₴</span></div>
                 </div>
             </div>
             </div> 

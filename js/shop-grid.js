@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         verticalSlider('slider_new_products', sixLastProd, 'Нове')
 
         const saleOff = data.products.filter(product => product.category == 'sale')
-        saleOffSlider('product_discount', data.products)
+        saleOffSlider('product_discount', saleOff)
 
         cart = new Cart();
         console.log(`Performance: ${performance.now() - perform1}`)    
