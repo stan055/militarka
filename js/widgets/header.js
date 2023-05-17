@@ -29,7 +29,7 @@ function header(id, info, li1='',li2='',li3='',li4='') {
                         <span class="arrow_carrot-down"></span>
                     </div>
                     <div class="header__top__right__auth">
-                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> Вхід</a>
+                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> Увійти</a>
                     </div>
                 </div>
             </div>

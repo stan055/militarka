@@ -11,18 +11,15 @@ function loginForm(containerId, openBtnId, loginData) {
         document.getElementById('login_login').addEventListener('click', () => signIn())
 
         function signIn() {
-            const name = document.getElementById('login_name').value
-            const pass = document.getElementById('login_password').value
             try {
-                if(loginData[name].pass == pass) {
-                    const obj = {
-                        [name]: {
-                            "pass": pass,
-                            "type": loginData[name].type
-                        }
-                    }
-                    localStorage.setItem("login", JSON.stringify(obj))
+                const name = document.getElementById('login_name').value
+                const pass = document.getElementById('login_password').value
+                const user = loginData.find(user => user.name == name & user.pass == pass)
+                if (user) {
+                    localStorage.setItem("LOGIN", JSON.stringify(user))
                     formToggle()
+                } else {
+                    throw new Error('Login: User not finded');
                 }
             } catch (error) {
                 document.getElementById('login_error').innerHTML = 
