@@ -1,4 +1,4 @@
-function loginForm(containerId, openBtnId) {
+function loginForm(containerId, openBtnId, loginData) {
     const container = document.getElementById(containerId)
     addStyle()
     addHTML()
@@ -8,6 +8,28 @@ function loginForm(containerId, openBtnId) {
         document.getElementById(openBtnId).addEventListener('click', () => formToggle())
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
+        document.getElementById('login_login').addEventListener('click', () => signIn())
+
+        function signIn() {
+            const name = document.getElementById('login_name').value
+            const pass = document.getElementById('login_password').value
+            try {
+                if(loginData[name].pass == pass) {
+                    const obj = {
+                        [name]: {
+                            "pass": pass,
+                            "type": loginData[name].type
+                        }
+                    }
+                    localStorage.setItem("login", JSON.stringify(obj))
+                    formToggle()
+                }
+            } catch (error) {
+                document.getElementById('login_error').innerHTML = 
+                `<p style="color: var(--danger);">Невірний логін або пароль!</p>`
+            }
+        }
+        
         function formToggle() {
             container.classList.toggle('hide')
             document.getElementById('overlay').classList.toggle('visible');
@@ -22,12 +44,12 @@ function loginForm(containerId, openBtnId) {
             <h2>Вхід</h2>
             <br>
             <label for="name"><b>Імя</b></label>
-            <input type="text" placeholder="Введіть Імя" name="name" required>
+            <input type="text" id="login_name" placeholder="Введіть Імя" name="name" required>
 
             <label for="psw"><b>Пароль</b></label>
-            <input type="password" placeholder="Введіть Пароль" name="psw" required>
-
-            <button type="button" class="btn">Вхід</button>
+            <input type="password" id="login_password" placeholder="Введіть Пароль" name="psw" required>
+            <div id="login_error"></div>
+            <button type="button" class="btn" id="login_login">Вхід</button>
             <button type="button" class="btn cancel" id="login_close">Закрити</button>
             </form>
         </div>`}

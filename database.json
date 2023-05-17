@@ -6,6 +6,12 @@
     "header_logo": "MILITARKA",
     "address": "Ukraine"
   },
+  "login": {
+    "admin": {
+      "pass": "admin",
+      "type": "admin"
+    }
+  },
   "categories": {
     "tactical_equipment": "Тактичне спорядження",
     "shoes": "Взуття",

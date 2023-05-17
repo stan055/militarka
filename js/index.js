@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const perform1 = performance.now();
         document.getElementById('title').textContent = data.info.header_logo
         header('header', data.info, 'active'); //  Render logo, pages-menu, cart...
-        loginForm('login_popup_form', 'login_form_btn')
+        loginForm('login_popup_form', 'login_form_btn', data.login)
         humbergerMenu('humberger_menu', data.info) // Hamberger menu rendering and start
         hero('hero', data.categories, data.info.tel); // Render menu, search, tel
         heroBanner('home_page_slider', data.products); // Render Main Big Banner
