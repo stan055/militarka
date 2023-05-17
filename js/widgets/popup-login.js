@@ -5,10 +5,17 @@ function loginForm(containerId, openBtnId, loginData) {
     addListeners()
 
     function addListeners() {
-        document.getElementById(openBtnId).addEventListener('click', () => formToggle())
+        document.getElementById(openBtnId).addEventListener('click', () => {
+            window.login.user == null ? formToggle() : singOut()
+        })
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
         document.getElementById('login_login').addEventListener('click', () => signIn())
+
+        function singOut() {
+            window.login.remove()
+            location.reload()
+        }
 
         function signIn() {
             try {
@@ -18,6 +25,7 @@ function loginForm(containerId, openBtnId, loginData) {
                 if (user) {
                     localStorage.setItem("LOGIN", JSON.stringify(user))
                     formToggle()
+                    location.reload()
                 } else {
                     throw new Error('Login: User not finded');
                 }

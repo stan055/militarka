@@ -1,7 +1,7 @@
 
 // Render header with container id and info email, free-shipping text, logo text
 // li* = active - Activated menu item 
-function header(id, info, li1='',li2='',li3='',li4='') {
+function header(id, info, user=null, li1='',li2='',li3='',li4='') {
     const header = document.getElementById(id);
     header.innerHTML = `
     <div class="header__top">
@@ -29,7 +29,7 @@ function header(id, info, li1='',li2='',li3='',li4='') {
                         <span class="arrow_carrot-down"></span>
                     </div>
                     <div class="header__top__right__auth">
-                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> Увійти</a>
+                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> ${user == null ? 'Увійти':'Вийти'}</a>
                     </div>
                 </div>
             </div>
