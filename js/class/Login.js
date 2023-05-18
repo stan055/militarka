@@ -1,8 +1,30 @@
 class Login {
+    // user:
+    // {
+    //     "name": "",
+    //     "pass": "",
+    //     "type": ""
+    // }
     user=null
 
     constructor() {
         this.user = this.getUser()
+    }
+
+    signIn(user) {
+        this.user = user
+        this.save()
+        location.reload()
+    }
+
+    signOut() {
+        this.remove()
+        location.reload()
+    }
+
+    remove() {
+        localStorage.removeItem('LOGIN')
+        this.user = null
     }
 
     save() {
@@ -16,9 +38,5 @@ class Login {
         else 
             return null
     }
-
-    remove() {
-        localStorage.removeItem('LOGIN')
-        this.user = null
-    }
 }
+

@@ -13,8 +13,7 @@ function loginForm(containerId, openBtnId, loginData) {
         document.getElementById('login_login').addEventListener('click', () => signIn())
 
         function singOut() {
-            window.login.remove()
-            location.reload()
+            window.login.singOut()
         }
 
         function signIn() {
@@ -23,9 +22,8 @@ function loginForm(containerId, openBtnId, loginData) {
                 const pass = document.getElementById('login_password').value
                 const user = loginData.find(user => user.name == name & user.pass == pass)
                 if (user) {
-                    localStorage.setItem("LOGIN", JSON.stringify(user))
                     formToggle()
-                    location.reload()
+                    window.login.signIn(user)
                 } else {
                     throw new Error('Login: User not finded');
                 }
