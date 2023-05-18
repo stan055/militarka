@@ -6,7 +6,9 @@ function header(id, info, user=null, li1='',li2='',li3='',li4='') {
     let userType = 'guest'
     try {
         userType = user.type
-    } catch (error) {}
+    } catch (error) {
+        console.error(error)
+    }
 
     header.innerHTML = `
     <div class="header__top">
