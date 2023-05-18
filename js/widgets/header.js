@@ -3,6 +3,11 @@
 // li* = active - Activated menu item 
 function header(id, info, user=null, li1='',li2='',li3='',li4='') {
     const header = document.getElementById(id);
+    let userType = 'guest'
+    try {
+        userType = user.type
+    } catch (error) {}
+
     header.innerHTML = `
     <div class="header__top">
     <div class="container">
@@ -29,7 +34,7 @@ function header(id, info, user=null, li1='',li2='',li3='',li4='') {
                         <span class="arrow_carrot-down"></span>
                     </div>
                     <div class="header__top__right__auth">
-                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> ${user == null ? 'Увійти':'Вийти'}</a>
+                        <a href="#" id="login_form_btn"><i class="fa fa-user"></i> ${userType=='guest'?'Увійти':'Вийти'}</a>
                     </div>
                 </div>
             </div>
@@ -57,6 +62,7 @@ function header(id, info, user=null, li1='',li2='',li3='',li4='') {
                             </ul>
                         </li>
                         <li class="${li4}"><a href="./contact.html">Контакти</a></li>
+                        ${userType=='admin'?'<li><a href="./admin-panel.html">Адмін Панель</a></li>':''}
                     </ul>
                 </nav>
             </div>

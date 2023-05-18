@@ -13,7 +13,7 @@ function loginForm(containerId, openBtnId, loginData) {
         document.getElementById('login_login').addEventListener('click', () => signIn())
 
         function singOut() {
-            window.login.singOut()
+            window.login.signOut()
         }
 
         function signIn() {
