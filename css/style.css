@@ -3735,3 +3735,24 @@ ol {
 	padding: 1rem;
 	border: 1px solid white;
 }
+
+.admin-menu {
+	background-color: var(--gray);
+	width: 250px;
+}
+
+.admin-logo {
+	color: var(--white);
+	font-weight: 500;
+	background-color: var(--dark);
+}
+
+.admin-menu-item {
+	color: var(--white);
+	padding: .8rem;
+	cursor: pointer;
+}
+
+.admin-menu-item:hover {
+	background-color: var(--gray-dark);
+}
