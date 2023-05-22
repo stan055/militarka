@@ -13,12 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -27,23 +27,20 @@
         <div class="admin-menu">
           <a href="./"><h2 class="p-3 admin-logo">Militarka</h2></a>
           <ul>
-            <li class="admin-menu-item" value="general">
+            <li class="admin-menu-item" src="./general.html">
               Налаштування
             </li>
-            <li class="admin-menu-item" value="add_product">
+            <li class="admin-menu-item" src="./add-product.html">
               Додати товар
             </li>
           </ul>
         </div>
         <div class="admin-main">
-          <h2 class="admin-main-item" id="general">General</h2>
-          <h2 class="hide admin-main-item" id="add_product">Add_Product</h2>
-          <h2 class="hide admin-main-item" >main3</h2>
+          <iframe src="./general.html" frameborder="0"></iframe>
         </div>
       </div>  
     </div>
 
-
-    <script src="js/admin-panel.js"></script>
+    <script src="/js/admin-panel.js"></script>
   </body>
 </html>

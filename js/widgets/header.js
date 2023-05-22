@@ -64,7 +64,7 @@ function header(id, info, user=null, li1='',li2='',li3='',li4='') {
                             </ul>
                         </li>
                         <li class="${li4}"><a href="./contact.html">Контакти</a></li>
-                        ${userType=='admin'?'<li><a href="./admin-panel.html">Адмін Панель</a></li>':''}
+                        ${userType=='admin'?'<li><a href="./admin-panel/index.html">Адмін Панель</a></li>':''}
                     </ul>
                 </nav>
             </div>
