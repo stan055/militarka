@@ -57,7 +57,8 @@
 } */
 
 :root {
-	--border-color: #ebebeb
+	--border-color: #ebebeb;
+	--green-dark: #24923d;
 }
 
 html,
@@ -3737,14 +3738,14 @@ ol {
 }
 
 .admin-menu {
-	background-color: var(--gray);
+	background-color: var(--green);
 	width: 250px;
 }
 
 .admin-logo {
 	color: var(--white);
 	font-weight: 500;
-	background-color: var(--dark);
+	background-color: black;
 }
 
 .admin-menu-item {
@@ -3754,5 +3755,5 @@ ol {
 }
 
 .admin-menu-item:hover {
-	background-color: var(--gray-dark);
+	background-color: var(--green-dark);
 }

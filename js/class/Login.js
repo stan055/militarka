@@ -36,7 +36,11 @@ class Login {
         if (json != null)
             return JSON.parse(json)
         else 
-            return null
+            return {
+                "name": null,
+                "pass": null,
+                "type": null
+            }
     }
 }
 
