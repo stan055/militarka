@@ -3742,6 +3742,10 @@ ol {
 	width: 250px;
 }
 
+.admin-main {
+	width: calc(100% - 250px);
+}
+
 .admin-logo {
 	color: var(--white);
 	font-weight: 500;
