@@ -39,7 +39,7 @@ class Login {
             return {
                 "name": null,
                 "pass": null,
-                "type": null
+                "type": 'guest'
             }
     }
 }

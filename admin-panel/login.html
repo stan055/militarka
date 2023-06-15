@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вхід</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
-<body class="d-flex align-items-center">
+<body class="d-flex align-items-center" id="body">
+    <div id="overlay" class="overlay"></div>
     <div class="align-content-center w-100 p-4">
         <h4 class="d-flex justify-content-center">Для користування адмін-панеллю необхідно виповнити вхід адміністратора</h4>
-        <div class="d-flex justify-content-center">Вхід</div>
+        <br>
+        <div class="d-flex justify-content-center header__top__right__auth">
+            <a href="#" id="login_form_btn">
+                <h4><i class="fa fa-user"></i>Увійти</h4>
+            </a>
+        </div>
+    
+        <div id="login_popup_form" class="hide"></div>
+
     </div>
+    <script src="/js/class/Login.js"></script>
+    <script src="/js/service/Database.js"></script>
+    <script src="/js/widgets/popup-login.js"></script>
+    <script src="/js/admin-panel/login.js"></script>
 </body>
 </html>

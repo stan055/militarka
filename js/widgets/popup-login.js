@@ -6,7 +6,7 @@ function loginForm(containerId, openBtnId, loginData) {
 
     function addListeners() {
         document.getElementById(openBtnId).addEventListener('click', () => {
-            window.login.user == null ? formToggle() : singOut()
+            window.login.user.type == 'guest' ? formToggle() : singOut()
         })
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
