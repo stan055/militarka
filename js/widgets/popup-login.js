@@ -5,9 +5,14 @@ function loginForm(containerId, openBtnId, loginData, login) {
     addListeners()
 
     function addListeners() {
-        document.getElementById(openBtnId).addEventListener('click', () => {
-            login.user.type == 'guest' ? formToggle() : login.signOut()
-        })
+        try {
+            document.getElementById(openBtnId).addEventListener('click', () => {
+                login.user.type == 'guest' ? formToggle() : login.signOut()
+            })    
+        } catch (error) {
+            console.log(error)
+        }
+       
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
         document.getElementById('login_login').addEventListener('click', () => signIn())
