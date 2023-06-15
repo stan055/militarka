@@ -6,16 +6,11 @@ function loginForm(containerId, openBtnId, loginData) {
 
     function addListeners() {
         document.getElementById(openBtnId).addEventListener('click', () => {
-            window.login.user.type == 'guest' ? formToggle() : singOut()
+            window.login.user.type == 'guest' ? formToggle() : window.login.signOut()
         })
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
         document.getElementById('login_login').addEventListener('click', () => signIn())
-    }
-
-    function singOut() {
-        window.login.signOut()
-        location.reload()
     }
 
     function signIn() {

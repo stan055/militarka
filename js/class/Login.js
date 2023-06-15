@@ -18,6 +18,7 @@ class Login {
 
     signOut() {
         this.remove()
+        location.reload()
     }
 
     remove() {
