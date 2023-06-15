@@ -36,7 +36,7 @@ class Database {
     async getServerData() {
         console.log('get Server data')
         try {
-            let result = await fetch('./database.json');
+            let result = await fetch(`${location.origin}/database.json`);
             let data = await result.json();
             return data;
         } catch (error) {

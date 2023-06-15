@@ -1,4 +1,4 @@
-function loginForm(containerId, openBtnId, loginData) {
+function loginForm(containerId, openBtnId, loginData, login) {
     const container = document.getElementById(containerId)
     addStyle()
     addHTML()
@@ -6,7 +6,7 @@ function loginForm(containerId, openBtnId, loginData) {
 
     function addListeners() {
         document.getElementById(openBtnId).addEventListener('click', () => {
-            window.login.user.type == 'guest' ? formToggle() : window.login.signOut()
+            login.user.type == 'guest' ? formToggle() : login.signOut()
         })
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
@@ -20,7 +20,7 @@ function loginForm(containerId, openBtnId, loginData) {
             const user = loginData.find(user => user.name == name & user.pass == pass)
             if (user) {
                 formToggle()
-                window.login.signIn(user)
+                login.signIn(user)
                 location.reload()
             } else {
                 throw new Error('Login: User not finded');
