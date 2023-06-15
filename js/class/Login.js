@@ -14,12 +14,10 @@ class Login {
     signIn(user) {
         this.user = user
         this.save()
-        location.reload()
     }
 
     signOut() {
         this.remove()
-        location.reload()
     }
 
     remove() {

@@ -14,6 +14,7 @@ function loginForm(containerId, openBtnId, loginData) {
 
         function singOut() {
             window.login.signOut()
+            location.reload()
         }
 
         function signIn() {
@@ -24,6 +25,7 @@ function loginForm(containerId, openBtnId, loginData) {
                 if (user) {
                     formToggle()
                     window.login.signIn(user)
+                    location.reload()
                 } else {
                     throw new Error('Login: User not finded');
                 }
