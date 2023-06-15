@@ -11,35 +11,35 @@ function loginForm(containerId, openBtnId, loginData) {
         document.getElementById('login_close').addEventListener('click', () => formToggle())
         document.getElementById('overlay').addEventListener('click', () => formToggle())
         document.getElementById('login_login').addEventListener('click', () => signIn())
+    }
 
-        function singOut() {
-            window.login.signOut()
-            location.reload()
-        }
+    function singOut() {
+        window.login.signOut()
+        location.reload()
+    }
 
-        function signIn() {
-            try {
-                const name = document.getElementById('login_name').value
-                const pass = document.getElementById('login_password').value
-                const user = loginData.find(user => user.name == name & user.pass == pass)
-                if (user) {
-                    formToggle()
-                    window.login.signIn(user)
-                    location.reload()
-                } else {
-                    throw new Error('Login: User not finded');
-                }
-            } catch (error) {
-                document.getElementById('login_error').innerHTML = 
-                `<p style="color: var(--danger);">Невірний логін або пароль!</p>`
+    function signIn() {
+        try {
+            const name = document.getElementById('login_name').value
+            const pass = document.getElementById('login_password').value
+            const user = loginData.find(user => user.name == name & user.pass == pass)
+            if (user) {
+                formToggle()
+                window.login.signIn(user)
+                location.reload()
+            } else {
+                throw new Error('Login: User not finded');
             }
+        } catch (error) {
+            document.getElementById('login_error').innerHTML = 
+            `<p style="color: var(--danger);">Невірний логін або пароль!</p>`
         }
-        
-        function formToggle() {
-            container.classList.toggle('hide')
-            document.getElementById('overlay').classList.toggle('visible');
-            document.getElementById('body').classList.toggle('stop-scrolling');   
-        }
+    }
+    
+    function formToggle() {
+        container.classList.toggle('hide')
+        document.getElementById('overlay').classList.toggle('visible');
+        document.getElementById('body').classList.toggle('stop-scrolling');   
     }
 
     function addHTML() { 
