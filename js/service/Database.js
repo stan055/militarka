@@ -55,4 +55,8 @@ class Database {
         }
     }
 
+    saveDataToServer(data){
+
+    }
+
 }
