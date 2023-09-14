@@ -261,7 +261,7 @@ function createCategoryList(array) {
          const id = `category_${element.split(' ').join('_')}`
          const liId = `li_${id}`
          categoryList.innerHTML += `<li id="${liId}" class="list-group-item d-flex justify-content-between align-items-center">${element}<button id=${id} type="submit" class="btn btn-outline-dark">Видалити</button></li>`
-      })      
+      })
    } catch (error) {
       console.log(error)
    }
@@ -275,38 +275,58 @@ function createCategoryList(array) {
 document.getElementById('addProductBtn').addEventListener('click', () => {
    const form = document.getElementById('productForm')
    const productForm = new FormData(form)
-   
+
    const product = {
       title: productForm.get('title'),
       category: productForm.get('category'),
       price: productForm.get('price'),
       attribute: productForm.get('attribute'),
       description: productForm.get('description'),
-      image1: productForm.get('image1'),
-      image2: productForm.get('image2'), 
-      image3: productForm.get('image3'), 
-      image4: productForm.get('image4'), 
-      image5: productForm.get('image5'),
+      image: productForm.get('image1'),
+      images: [
+         productForm.get('image2'),
+         productForm.get('image3'),
+         productForm.get('image3'),
+         productForm.get('image4'),
+         productForm.get('image5')
+      ],
       id: getRandomInt(1000000000000, 9999999999999)
    }
-   
-   if (product.title.length === 0) {
-      alert('Помилка! Введіть назву товару!')
+
+   if (product.title.length === 0) return
+   if (product.category.length === 0) return
+   if (product.price.length === 0) return
+   if (product.description.length === 0) return
+   if (product.image.size === 0) return
+
+   const imagesEl = document.querySelectorAll('#productForm input[type="file"]')
+   if (product.image.size > 1000000) {
+      alert(`Помилка! Розмір ${product.image.name}  ПЕРЕВІЩУЄ ЛІМІТ 1мб!`)
+      imagesEl[0].value = ''
       return
    }
-   if (product.category.length === 0) {
-      alert('Помилка! Введіть категорію!')
+   if (product.images[0].size > 1000000) {
+      alert(`Помилка! Розмір ${product.images[0].name}  ПЕРЕВІЩУЄ ЛІМІТ 1мб!`)
+      imagesEl[1].value = ''
       return
    }
-   if (product.price.length === 0) {
-      alert('Помилка! Ціну!')
+   if (product.images[1].size > 1000000) {
+      alert(`Помилка! Розмір ${product.images[0].name}  ПЕРЕВІЩУЄ ЛІМІТ 1мб!`)
+      imagesEl[2].value = ''
       return
    }
-   if (product.description.length === 0) {
-      alert('Помилка! Введіть опис товару!')
+   if (product.images[2].size > 1000000) {
+      alert(`Помилка! Розмір ${product.images[0].name}  ПЕРЕВІЩУЄ ЛІМІТ 1мб!`)
+      imagesEl[3].value = ''
+      return
+   }
+   if (product.images[3].size > 1000000) {
+      alert(`Помилка! Розмір ${product.images[0].name}  ПЕРЕВІЩУЄ ЛІМІТ 1мб!`)
+      imagesEl[4].value = ''
       return
    }
 
+   console.log('Product END')
 })
 
 // ----------------ADD PRODUCT END--------------------

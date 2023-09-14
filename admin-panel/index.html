@@ -141,12 +141,12 @@
 
                      <div class="form-group row">
                         <label for="inputProdTitle" class="col-form-label">Головна назва*</label>
-                        <input type="text" class="form-control" id="inputProdTitle" name="title" placeholder="Назва Товару..." minlength="1">
+                        <input type="text" class="form-control" id="inputProdTitle" name="title" placeholder="Назва Товару..." minlength="1" required>
                      </div>
 
                      <div class="form-group row">
                         <label class="col-form-label" for="inputListCategory">Введіть категорію*</label>
-                        <input list="listCategory" name="category" id="inputListCategory" class="form-control">
+                        <input list="listCategory" name="category" id="inputListCategory" class="form-control" required>
                         <datalist id="listCategory">
                            <option value="Edge">
                            <option value="Firefox">
@@ -158,7 +158,7 @@
 
                      <div class="form-group row">
                         <label class="col-form-label">Ціна*</label>
-                        <input type="number" class="form-control" name="price" placeholder="99.00">
+                        <input type="number" class="form-control" name="price" placeholder="99.00" required>
                      </div>
 
                      <div class="form-group row">
@@ -170,29 +170,29 @@
                      <div class="form-group row">
                         <label class="col-form-label">Опис товару*</label>
                         <textarea id="inputProdDescript" name="description" rows="8" cols="70"
-                           placeholder="Опис товару..."></textarea>
+                           placeholder="Опис товару..." required></textarea>
                      </div>
 
                      <h5 class="py-3">Додайте зображення(максимальний розмір 1мб.), рекомендований розмір фото до 500кб.</h5>
                      <div class="form-group row">
                         <label class="col-form-label"><strong>#1 обов'язкове*</strong></label>
-                        <input type="file" id="picture1" name="picture1" accept="image/png, image/jpeg" />
+                        <input type="file" name="image1" accept=".jpg, .jpeg, .png" required/>
                      </div>
                      <div class="form-group row">
                         <label class="col-form-label">#2 не обов'язкове</label>
-                        <input type="file" id="picture2" name="picture2" accept="image/png, image/jpeg" />
+                        <input type="file" name="image2" accept=".jpg, .jpeg, .png" />
                      </div>
                      <div class="form-group row">
                         <label class="col-form-label">#3 не обов'язкове</label>
-                        <input type="file" id="picture3" name="picture3" accept="image/png, image/jpeg" />
+                        <input type="file" name="image3" accept=".jpg, .jpeg, .png" />
                      </div>
                      <div class="form-group row">
                         <label class="col-form-label">#4 не обов'язкове</label>
-                        <input type="file" id="picture4" name="picture4" accept="image/png, image/jpeg" />
+                        <input type="file" name="image4" accept=".jpg, .jpeg, .png" />
                      </div>
                      <div class="form-group row">
                         <label class="col-form-label">#5 не обов'язкове</label>
-                        <input type="file" id="picture5" name="picture5" accept="image/png, image/jpeg" />
+                        <input type="file" name="image5" accept=".jpg, .jpeg, .png" />
                      </div>
 
                      <div class="text-center">
