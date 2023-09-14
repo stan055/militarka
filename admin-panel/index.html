@@ -2,45 +2,231 @@
 <html lang="zxx" class="stop-scrolling">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title id="title"></title>
+   <meta charset="UTF-8">
+   <meta name="description" content="Ogani Template">
+   <meta name="keywords" content="Ogani, unica, creative, html">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title id="title"></title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <!-- Google Font -->
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/style.css" type="text/css">
+   <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
-    <div class="container-fluid h-100">
+   <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="admin-menu">
-          <a href="/"><h2 class="p-3 admin-logo" id="logo">Militarka</h2></a>
-          <ul>
-            <li class="admin-menu-item" src="./general.html">
-              Налаштування
-            </li>
-            <li class="admin-menu-item" src="./add-product.html">
-              Додати товар
-            </li>
-          </ul>
-        </div>
-        <div class="admin-main">
-          <iframe src="./general.html" frameborder="0" width="100%" height="100%"></iframe>
-        </div>
-      </div>  
-    </div>
-    <script src="/js/service/Database.js"></script>
-    <script src="/js/class/Login.js"></script>
-    <script src="/js/admin-panel/admin-panel.js"></script>
-  </body>
+
+         <!-- Side Menu -->
+         <div class="admin-menu ">
+            <div>
+               <a href="/">
+                  <h2 class="p-3 admin-logo" id="logo">Militarka</h2>
+               </a>
+               <ul>
+                  <li class="admin-menu-item" name="setting">
+                     Основні налаштування
+                  </li>
+                  <li class="admin-menu-item" name="category">
+                     Головне меню категорії
+                  </li>
+                  <li class="admin-menu-item" name="add-product">
+                     Додати продукт
+                  </li>
+                  <li class="admin-menu-item" name="all-product">
+                     Всі товари, редагувати, видалити...
+                  </li>
+                  <li class="admin-menu-item" name="add-product">
+                     Слайдер, дизайн, колір...
+                  </li>
+               </ul>
+            </div>
+            <div>
+               <button id="signout_btn">Вийти</button>
+            </div>
+         </div>
+
+         <!-- Admin Body  -->
+         <div class="admin-body">
+
+            <!-- Setting page  -->
+            <section name="setting" class="hide">
+               <h4 class="pl-3 pt-3">Основні налаштування</h4>
+               <div class="border-line"></div>
+               <div class="p-3">
+
+                  <h5 class="pb-3">Логін адміністратора</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputEmail" class="col-form-label">Введіть Емеіл</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="admin@example.com">
+                        <button id="emailBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 pt-4">Пароль адміністратора</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputPass" class="col-form-label">Введіть пароль</label>
+                        <input type="password" class="form-control" id="inputPass" placeholder="Пароль" minlength="6">
+                        <button id="passBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+               </div>
+
+               <div class="border-line"></div>
+               <div class="p-3">
+
+                  <h5 class="pb-3 pt-4">Ім`я магазину</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputName" class="col-form-label">Введіть текст</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Ім`я" minlength="1">
+                        <button id="nameBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 pt-4">Адреса</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputAddress" class="col-form-label">Введіть текст</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="м.Київ..." minlength="1">
+                        <button id="addressBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 pt-4">Емеіл магазину</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputEmailStor" class="col-form-label">Введіть емеіл</label>
+                        <input type="email" class="form-control" id="inputEmailStor" placeholder="store@example.com"
+                           minlength="6">
+                        <button id="emailStorBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 pt-4">Телефон</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputTel" class="col-form-label">Введіть номер</label>
+                        <input type="tel" class="form-control" id="inputTel" placeholder="8(067)234-23-45">
+                        <button id="telBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 pt-4">Текст в шапці</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputText" class="col-form-label">Введіть текст</label>
+                        <input type="text" class="form-control" id="inputText" placeholder="Безкоштовна доставка...">
+                        <button id="textBtn" type="submit" class="btn primary-btn ml-4">Змінити</button>
+                     </div>
+                  </form>
+
+               </div>
+            </section>
+
+            <!-- Add product page -->
+            <section class="" name="add-product">
+               <h4 class="pl-3 pt-3">Додати продукт</h4>
+               <div class="border-line"></div>
+               <div class="p-3">
+                  <h5 class="pb-3">Заповніть поля</h5>
+                  <form onsubmit="return false" id="productForm">
+
+                     <div class="form-group row">
+                        <label for="inputProdTitle" class="col-form-label">Головна назва*</label>
+                        <input type="text" class="form-control" id="inputProdTitle" name="title" placeholder="Назва Товару..." minlength="1">
+                     </div>
+
+                     <div class="form-group row">
+                        <label class="col-form-label" for="inputListCategory">Введіть категорію*</label>
+                        <input list="listCategory" name="category" id="inputListCategory" class="form-control">
+                        <datalist id="listCategory">
+                           <option value="Edge">
+                           <option value="Firefox">
+                           <option value="Chrome">
+                           <option value="Opera">
+                           <option value="Safari">
+                        </datalist>
+                     </div>
+
+                     <div class="form-group row">
+                        <label class="col-form-label">Ціна*</label>
+                        <input type="number" class="form-control" name="price" placeholder="99.00">
+                     </div>
+
+                     <div class="form-group row">
+                        <label class="col-form-label">Атрибути</label>
+                        <textarea id="inputProdAttr" name="attribute" rows="4" cols="40"
+                           placeholder="Колір: білий&#10;Розмір: M, L, XL"></textarea>
+                     </div>
+
+                     <div class="form-group row">
+                        <label class="col-form-label">Опис товару*</label>
+                        <textarea id="inputProdDescript" name="description" rows="8" cols="70"
+                           placeholder="Опис товару..."></textarea>
+                     </div>
+
+                     <h5 class="py-3">Додайте зображення(максимальний розмір 1мб.), рекомендований розмір фото до 500кб.</h5>
+                     <div class="form-group row">
+                        <label class="col-form-label"><strong>#1 обов'язкове*</strong></label>
+                        <input type="file" id="picture1" name="picture1" accept="image/png, image/jpeg" />
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-form-label">#2 не обов'язкове</label>
+                        <input type="file" id="picture2" name="picture2" accept="image/png, image/jpeg" />
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-form-label">#3 не обов'язкове</label>
+                        <input type="file" id="picture3" name="picture3" accept="image/png, image/jpeg" />
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-form-label">#4 не обов'язкове</label>
+                        <input type="file" id="picture4" name="picture4" accept="image/png, image/jpeg" />
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-form-label">#5 не обов'язкове</label>
+                        <input type="file" id="picture5" name="picture5" accept="image/png, image/jpeg" />
+                     </div>
+
+                     <div class="text-center">
+                        <button id="addProductBtn" class="btn primary-btn ml-4">Додати Продукт</button>
+                     </div>
+                  </form>
+               </div>
+            </section>
+
+            <!-- Додати Категорію -->
+            <section class="hide" name="category">
+               <h4 class="pl-3 pt-3">Головне меню категорії</h4>
+               <div class="border-line"></div>
+               <div class="p-3">
+                  <h5 class="pb-3">Додати Категорію</h5>
+                  <form onsubmit="return false">
+                     <div class="form-group row">
+                        <label for="inputCategory" class="col-form-label">Введіть назву</label>
+                        <input type="text" class="form-control" id="inputCategory" placeholder="Взуття">
+                        <button id="categoryBtn" type="submit" class="btn primary-btn ml-4">Додати</button>
+                     </div>
+                  </form>
+
+                  <h5 class="pb-3 mt-5">Всі Категорії</h5>
+                  <ul class="list-group category-list" id="categoryList">
+                  </ul>
+               </div>
+            </section>
+         </div>
+
+      </div>
+
+   </div>
+</body>
+<script type="module" src="admin.js"></script>
+
 </html>

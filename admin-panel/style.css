@@ -1,0 +1,103 @@
+.form-popup {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 3px solid #f1f1f1;
+    z-index: 9999;
+    transform: translate(-50%, -50%)
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container .btn {
+    background-color: var(--success);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+.admin-menu {
+    display: flex;                   
+    flex-direction: column;
+    justify-content: space-between;   
+	background-color: var(--green);
+	width: 250px;
+}
+
+.admin-body {
+	width: calc(100% - 250px);
+}
+
+.admin-logo {
+	color: var(--white);
+	font-weight: 500;
+	background-color: var(--black);
+}
+
+.admin-menu-item {
+	color: var(--white);
+	padding: .8rem;
+	cursor: pointer;
+}
+
+.admin-menu-item:hover {
+	background-color: var(--green-dark);
+}
+
+#signout_btn {
+    width: 240px;
+    margin: 5px;
+    height: 45px;
+    color: white;
+    background-color: var(--black);
+    border-radius: 2px;
+    border: none;
+    align-self: baseline;
+}
+
+.form-control {
+    max-width: 300px;
+}
+
+.col-form-label {
+    width: 150px;
+}
+
+section {
+    height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 20vh;
+}
+
+.category-list {
+    max-width: 400px;
+}
+
+textarea {
+    border: 1px solid #ced4da;;
+}
+
+.form-group {
+    padding-left: 16px;
+}

@@ -1,23 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вхід</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
-<body class="d-flex align-items-center" id="body">
-    
-    <div id="overlay" class="overlay"></div>
-    <div id="login_popup_form" class=""></div>
 
-    <script src="/js/class/Login.js"></script>
-    <script src="/js/service/Database.js"></script>
-    <script src="/js/widgets/popup-login.js"></script>
-    <script src="/js/admin-panel/login.js"></script>
+<body>
+    <section class="d-flex align-items-center" name="login">
+        <div id="overlay" class="overlay"></div>
+        <div id="login_popup_form" class="">
+            <div class="form-popup">
+                <form onsubmit="return false" class="form-container" id="login_form">
+                    <h2>Вхід</h2>
+                    <br>
+                    <label for="email"><b>Емеіл</b></label>
+                    <input type="email" id="login_name" placeholder="user@mail.com" name="email" required>
+
+                    <label for="pass"><b>Пароль</b></label>
+                    <input type="password" id="login_password" placeholder="Введіть Пароль" name="pass" minlength="6"
+                        required>
+
+                    <p class="error" id="login_error"></p>
+                    <button class="btn" id="login_in">Вхід</button>
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
+<script type="module">
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"
+    import app from '../modules/firebase-app.js'
+
+    const form = document.getElementById('login_form')
+    const loginBtn = document.getElementById('login_in')
+    const divError = document.getElementById('login_error')
+
+    loginBtn.addEventListener('click', () => {
+        const formData = new FormData(form)
+        const auth = getAuth()
+        const email = formData.get('email')
+        const password = formData.get('pass')
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Save USER to localStorage 
+                const updatedUser = { 'email': email, 'password': password }
+                localStorage.setItem('USER', JSON.stringify(updatedUser))
+                // Follow to...
+                document.location.href = 'index.html'
+            })
+            .catch((error) => {
+                console.log(auth.currentUser)
+                divError.innerText = 'Невірний логін або пароль!'
+            })
+    })
+</script>
+
 </html>

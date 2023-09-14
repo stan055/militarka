@@ -58,7 +58,8 @@
 
 :root {
 	--border-color: #ebebeb;
-	--green-dark: #24923d;
+	--green-dark: #228739;
+	--black: #131313;
 }
 
 html,
@@ -3717,7 +3718,7 @@ ol {
 }
 
 .hide {
-	display: none;
+	display: none!important;
 }
 
 #ukr_post_list, #nv_post_list {
@@ -3737,27 +3738,7 @@ ol {
 	border: 1px solid white;
 }
 
-.admin-menu {
-	background-color: var(--green);
-	width: 250px;
+.error {
+	color: var(--danger);
 }
 
-.admin-main {
-	width: calc(100% - 250px);
-}
-
-.admin-logo {
-	color: var(--white);
-	font-weight: 500;
-	background-color: black;
-}
-
-.admin-menu-item {
-	color: var(--white);
-	padding: .8rem;
-	cursor: pointer;
-}
-
-.admin-menu-item:hover {
-	background-color: var(--green-dark);
-}

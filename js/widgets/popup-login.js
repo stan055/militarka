@@ -8,7 +8,7 @@ function loginForm(containerId, openBtnId, loginData, login) {
         try {
             document.getElementById('login_close').addEventListener('click', () => formToggle())
             document.getElementById('overlay').addEventListener('click', () => formToggle())
-            document.getElementById('login_login').addEventListener('click', () => signIn())
+            document.getElementById('login_in').addEventListener('click', () => signIn())
             document.getElementById(openBtnId).addEventListener('click', () => {
                 login.user.type == 'guest' ? formToggle() : login.signOut()
             })    

@@ -1,6 +1,18 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js'
+import firebaseConfig from "./service/firebase-config.js";
+
 
 let cart, database, popupCart;
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const citiesCol = collection(db, 'products');
+    const citySnapshot = await getDocs(citiesCol);
+    citySnapshot.docs.map(doc => {
+        console.log(doc.data())
+    });
 
     database = new Database();
     database.getDatabase()

@@ -1,4 +1,9 @@
+
 class Database {
+
+    constructor() {
+        this.getDatabase()
+    }
 
     // Get all data from server
     async getDatabase() {

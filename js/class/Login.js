@@ -1,10 +1,5 @@
 class Login {
-    // user:
-    // {
-    //     "name": "",
-    //     "pass": "",
-    //     "type": ""
-    // }
+
     user=null
 
     constructor() {
@@ -30,7 +25,7 @@ class Login {
         localStorage.setItem('LOGIN', JSON.stringify(this.user))
     }
 
-    getUser() {
+    static getUser() {
         const json = localStorage.getItem('LOGIN')
         if (json != null)
             return JSON.parse(json)
@@ -42,4 +37,8 @@ class Login {
             }
     }
 }
+
+export default Login
+
+
 
